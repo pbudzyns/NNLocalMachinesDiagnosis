@@ -7,7 +7,8 @@ class SignalsHandler:
     NO_PULSATION_NAME = "no_pulsation.csv"
     PULSATION_NAME = "pulsation.csv"
 
-    def __init__(self):
+    def __init__(self, preprocessing=None):
+        self.preprocessing = preprocessing
         self.no_pulsation = None
         self.pulsation = None
         self.data = None
@@ -20,6 +21,12 @@ class SignalsHandler:
         self.no_pulsation = np.genfromtxt(os.path.join(folder_name, self.NO_PULSATION_NAME), delimiter=",")
         self.pulsation = np.genfromtxt(os.path.join(folder_name, self.PULSATION_NAME), delimiter=",")
 
+    def load_no_pulsation(self, filename):
+        self.no_pulsation = np.genfromtxt(filename, delimiter=",")
+
+    def load_pulsation(self, filename):
+        self.pulsation = np.genfromtxt(filename, delimiter=",")
+
     def cut_signal(self, start, end):
         self.no_pulsation = self.no_pulsation[:, start:end]
         self.pulsation = self.pulsation[:, start:end]
@@ -28,11 +35,13 @@ class SignalsHandler:
         self._add_labels()
         self._compose_into_one()
         self._shuffle_data()
+        self._preprocess()
         self._split_into_train_test()
 
     def cross_validation(self, parts_number):
         self._add_labels()
         self._compose_into_one()
+        self._preprocess()
         self._shuffle_data()
         parts = self._split_into_n_parts(parts_number)
 
@@ -51,6 +60,10 @@ class SignalsHandler:
 
     def _compose_into_one(self):
         self.data = np.append(self.no_pulsation, self.pulsation, axis=0)
+
+    def _preprocess(self):
+        if self.preprocessing:
+            self.data = np.array(list(map(self.preprocessing, self.data)))
 
     def _shuffle_data(self):
         np.random.shuffle(self.data)
