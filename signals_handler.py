@@ -30,6 +30,21 @@ class SignalsHandler:
         self._shuffle_data()
         self._split_into_train_test()
 
+    def cross_validation(self, parts_number):
+        self._add_labels()
+        self._compose_into_one()
+        self._shuffle_data()
+        parts = self._split_into_n_parts(parts_number)
+
+        for i in range(parts_number):
+            testing_data = parts[i][:, 1:]
+            testing_labels = parts[i][:, 0]
+            learning = np.concatenate(parts[:i]+parts[i+1:])
+            learning_data = learning[:, 1:]
+            learning_labels = learning[:, 0]
+            yield learning_data, testing_data, learning_labels, testing_labels
+
+
     def _add_labels(self):
         self.no_pulsation[:, 0] = 0
         self.pulsation[:, 0] = 1
@@ -39,6 +54,9 @@ class SignalsHandler:
 
     def _shuffle_data(self):
         np.random.shuffle(self.data)
+
+    def _split_into_n_parts(self, n):
+        return np.array_split(self.data, n, axis=0)
 
     def _split_into_train_test(self):
         self.learning_data, self.testing_data, self.learning_labels, self.testing_labels = \
