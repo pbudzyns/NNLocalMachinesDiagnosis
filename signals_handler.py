@@ -48,11 +48,10 @@ class SignalsHandler:
         for i in range(parts_number):
             testing_data = parts[i][:, 1:]
             testing_labels = parts[i][:, 0]
-            learning = np.concatenate(parts[:i]+parts[i+1:])
+            learning = np.concatenate(parts[:i] + parts[i + 1:])
             learning_data = learning[:, 1:]
             learning_labels = learning[:, 0]
             yield learning_data, testing_data, learning_labels, testing_labels
-
 
     def _add_labels(self):
         self.no_pulsation[:, 0] = 0
