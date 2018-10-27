@@ -3,6 +3,7 @@ import numpy as np
 import time
 import threading
 from threading import Thread
+from collections import deque
 
 class SignalSource:
     def __init__(self, imp_amp=0.1, interval=0.5):
@@ -11,7 +12,7 @@ class SignalSource:
         self._max_time = 2
         self._single_signal_len = self._get_single_signal_len()
         self._total_signal_len = int((self._max_time/self._interval)*self._single_signal_len)
-        self._signal = None
+        self._signal = deque(maxlen=self._total_signal_len)
         self._active = threading.Event()
 
     def increase_pulsation(self, amount):
@@ -24,13 +25,13 @@ class SignalSource:
         return self._imp_amp
 
     def get_signal(self, duration, loop_time=1):
-        n = int((duration / self._max_time) * len(self._signal))
+        n = int((duration / self._max_time) * self._total_signal_len)
         t = time.time()
         while time.time() - t < loop_time:
-            yield self._signal[-n:]
+            yield list(self._signal)[-n:]
 
     def start_thread(self):
-        self._signal, _ = self._get_signal_for_interval()
+        # self._signal, _ = self._get_signal_for_interval()
         thread = Thread(target=self._generating_signal)
         thread.start()
 
@@ -40,9 +41,9 @@ class SignalSource:
     def _generating_signal(self):
         while self._active:
             signal, _ = self._get_signal_for_interval()
-            self._signal = np.append(self._signal, signal)
-            if len(self._signal) > self._total_signal_len:
-                self._signal = self._signal[-self._total_signal_len:]
+            self._signal.extend(signal)
+            # if len(self._signal) > self._total_signal_len:
+            #     self._signal = self._signal[-self._total_signal_len:]
             time.sleep(self._interval)
 
     def _get_signal_for_interval(self):
