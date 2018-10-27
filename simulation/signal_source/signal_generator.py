@@ -20,32 +20,24 @@ def signal_generator(fs, T, mu_imp1, f1_low, f1_high, s_noise, s_add):
     fft_mask1 = np.zeros((nx))
     rang = np.arange(round(f1_low / df), round(f1_high / df))
     fft_mask1[rang] = win1
-    # print(fft_mask1.shape)
     fft_mask1 = fft_mask1.reshape((1, len(fft_mask1)))
-    # print(fft_mask1.shape)
     fft_mask1 = fft_mask1 + np.rot90(fft_mask1, k=2)
 
     carrier1 = np.real(np.fft.ifft(np.fft.fft(noise) * fft_mask1))
     carrier1 = carrier1 / np.abs(scipy.signal.hilbert(carrier1))
 
     response1 = carrier1 * imp.reshape((1, len(imp)))
-    h1 = response1
-    # nh = len(h1)
-    # print(soi1.shape, h1.shape)
-    y = np.convolve(soi1, np.ndarray.flatten(h1))
+    y = np.convolve(soi1, np.ndarray.flatten(response1))
     y = y[1:nx]
 
     rob2 = np.random.randn(nx - 1)
     n_add = rob2 * s_add
     y = y + n_add
-    # print(y, y**2)
-    # print(len(n_add))
-    # SNR = 10*np.log10(np.sum(y**2)/len(y)/(np.sum(n_add**2)/len(n_add)))
     return y, t[:-1]
 
 
 if __name__ == '__main__':
-    y, t = signal_generator(fs=2 ** 13, T=2, mu_imp1=7,
+    y, t = signal_generator(fs=2 ** 13, T=1, mu_imp1=7,
                             f1_low=1500, f1_high=2500,
                             s_noise=0.1, s_add=0.7)
     import matplotlib.pyplot as plt
