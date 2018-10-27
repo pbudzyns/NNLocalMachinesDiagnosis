@@ -39,7 +39,6 @@ class SignalSource:
 
     def _get_single_signal_len(self):
         y, t = signal_generator(T=self._interval)
-        print(len(y))
         return len(y)
 
 if __name__ == '__main__':
@@ -47,6 +46,11 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     ss.start_thread()
     time.sleep(3)
+    for i in range(3):
+        plt.clf()
+        plt.plot(ss.get_signal(1))
+        plt.show()
+        time.sleep(1)
     ss.stop_thread()
     # plt.plot(ss.get_signal(1))
     # plt.show()
