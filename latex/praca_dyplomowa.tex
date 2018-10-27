@@ -1,10 +1,13 @@
-\documentclass[12pt, a4paper, oneside, draft]{report}
+\documentclass[12pt, a4paper, oneside, draft]{article}
+\usepackage[left=1in, right=1in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{polski}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{cite}
+%\usepackage[numbers,sort&compress]{natbib}
+\usepackage{notoccite}
 
 
 
@@ -25,36 +28,36 @@
 }
 
 
-\author{Paweł Budzyński}
-\title{Wykorzystanie sieci neuronowych w problemie wykrywania uszkodzeń lokalnych w maszynach górniczych}
-\date{28.11.2018 r.}
+\author{Paweł Budzyński \\ Wydział Matematyki, Politechnika Wrocławska}
+\title{\textbf{Wykorzystanie sieci neuronowych w problemie wykrywania uszkodzeń lokalnych w maszynach górniczych}}
+\date{2018 \\ Październik}
 
 \begin{document}
 	\maketitle
-	\tableofcontents
+	%\tableofcontents
 	%\mychapter{1}{Wstęp}
-	\chapter{Wstęp}
-	
-	
+	\section{Wstęp}
+	wykrywanie uszkodzeń lokalnych jest jednym z \cite{Zimroz01}
 	\section{Opis problemu}
 	\section{Sieci neuronowe}
 	
 	
-	\chapter{Metodologia}
+	%\chapter{Metodologia}
 	
 	\section{Wstępne przetwarzanie danych}
-	
+	\cite{Python}
 	\section{Zastosowanie sieci neuronowych}
+	\cite{Wylomanska01}
 	
 	
 	
-	\chapter{Wyniki dla danych symulowanych}
+	%\chapter{Wyniki dla danych symulowanych}
 	
 	\section{Surowy sygnał}
 	
 	\section{Estymatory}
 	
-	\chapter{Wnioski}
+	%\chapter{Wnioski}
 	
 	
 	
@@ -62,6 +65,7 @@
 %		\includegraphics[width=12cm]{wykres3.pdf}
 	\end{center}
 	
+	
+	%\bibliographystyle{unsrt}
 	\bibliography{mybib}
-	\bibliographystyle{plain}
 \end{document}
