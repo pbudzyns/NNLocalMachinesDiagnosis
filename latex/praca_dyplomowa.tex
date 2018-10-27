@@ -37,27 +37,49 @@
 	%\tableofcontents
 	%\mychapter{1}{Wstęp}
 	\section{Wstęp}
+	Praca ma na celu znalezienie skutecznego zastosowania sieci neuronowych w problemie wykrywania uszkodzeń lokalnych w maszynach górniczych na podstawie sygnału diagnostycznego
+	
+	\subsection{Opis problemu}
 	wykrywanie uszkodzeń lokalnych jest jednym z \cite{Zimroz01}
-	\section{Opis problemu}
-	\section{Sieci neuronowe}
+	Uszkodzenia lokalne powstające w przekładniach kół czerpakowych maszyn górniczych, są to na przykład ubytki, pęknięcia, wykruszone zęby.  Najskutecznejszą obecnie metodą pozyskania sygnału jest diagnostyka wibroakustyczna, okazuje się że uszkodzenia takie objawiają się cyklicznymi pulsacjami w sygnale. Amplituda pulsacji zależy od stopnia uszkodzenia. Z punktu widzenia matematyki detekcja takiego uszkodzenia polega na wykryciu, zazwyczaj niewidocznych na pierwszy rzut oka, pulsacji w sygnale diagnostycznym. 
+	
+	
+	\subsection{Sieci neuronowe}
+	Sieci neuronowe są jedną z prężnie roziwjających się technologii nauczanai maszynowego i szeroko wykorzystywane w sztucznej inteligencji,
+	pierwsze badania pojawiły się z wynalezieniem perceptronu w 1957 r., zaprezentować taki perceptron,
+	Istnieje wiele rodzajów sieci i są używane w wielu zastosowaniach, w pracy najpopularniejszy jest perceptron wielowarstwowy uczony z użyciem algorytmu propagacj wstecznej 
+	obecnie sieci znajduja zastosowanie w wielu dziedzinach, poniżej przykłady.
 	
 	
 	%\chapter{Metodologia}
+	\section{Metodologia}
 	
-	\section{Wstępne przetwarzanie danych}
+	\subsection{Wstępne przetwarzanie danych}
 	\cite{Python}
-	\section{Zastosowanie sieci neuronowych}
+	\subsection{Zastosowanie sieci neuronowych}
+	
+	
+	
 	\cite{Wylomanska01}
 	
 	
 	
 	%\chapter{Wyniki dla danych symulowanych}
+	\section{Wyniki dla symulowanych danych}
+	Z powodu zapotrzebowania na dużą ilosć danych w procesie uczenia sieci neuronowych dalsza praca opiera się na danych symulowanych. Program generujący sygnał pozwala na dobór szeregu parametrów takich jak częstotliwości, amplitudy, zaszumienie oraz siłę pulsacji.
+	\subsection{Przygotowanie danych}
+	Przed przystąpieniem do uczenia należało przygotować dane uczące, w tym przypadku jest to zestaw sygnałów bez pulsacji oraz sygnałów z różnymi pulsacjami, poniżej przedstawiono tabelkę szczegółowo opisującą przygotowany zbiór danych.
+	\subsection{Surowy sygnał}
+	Pierwszym eksperymentem było przetestowanie jak sieć poradzi sobie w przypadku surowych danych. Do nauczania użyto sygnału odpowiadającemu jednej sekundzie odczytu, co przy próbkowaniu na poziomie $x$ daje $w chuj$ próbek.
+	\\ Tutaj jebniesz schemat sieci
+	\\A tutaj tabelka z wniami 
 	
-	\section{Surowy sygnał}
+	Eksperyment ten przeprowadzony był bardziej dla porównania niż z żeczywistej potrzeby, użycie surowego sygnału i takiej ilości próbek nie wydaje się był optymalnym rozwiązaniem za to jest kosztowne, dobrą praktyką w dziedzinie nauczania maszynowego jest wstępna obróbka danych i znalezienie sposobu na 
 	
-	\section{Estymatory}
+	\subsection{Estymatory}
 	
 	%\chapter{Wnioski}
+	\section{Wnioski}
 	
 	
 	
