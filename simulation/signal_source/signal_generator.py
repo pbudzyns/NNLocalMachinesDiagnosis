@@ -1,5 +1,7 @@
 import numpy as np
 import scipy.signal
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
 def signal_generator(fs=2**13, T=1, mu_imp1=0, f1_low=1500, f1_high=2500, s_noise=0.1, s_add=0.7):

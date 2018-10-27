@@ -1,14 +1,10 @@
-from signals_handler import SignalsHandler
+from simulation.analytics.train_model.signals_handler import SignalsHandler
 from sklearn.neural_network import MLPClassifier
-from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, f1_score, recall_score, average_precision_score
-from sklearn.preprocessing import StandardScaler
 import scipy.stats
 import scipy.signal
 import numpy as np
 import os
-import glob
-from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import pandas as pd
 

@@ -5,7 +5,7 @@ import threading
 from threading import Thread
 
 class SignalSource:
-    def __init__(self, imp_amp, interval):
+    def __init__(self, imp_amp=0.1, interval=0.5):
         self._imp_amp = imp_amp
         self._interval = interval
         self._max_time = 2
@@ -14,9 +14,20 @@ class SignalSource:
         self._signal = None
         self._active = threading.Event()
 
-    def get_signal(self, time):
-        n = int((time / self._max_time) * len(self._signal))
-        return self._signal[-n:]
+    def increase_pulsation(self, amount):
+        self._imp_amp += amount
+
+    def decrease_pulsation(self, amount):
+        self._imp_amp -= amount
+
+    def get_pulsation(self):
+        return self._imp_amp
+
+    def get_signal(self, duration, loop_time=1):
+        n = int((duration / self._max_time) * len(self._signal))
+        t = time.time()
+        while time.time() - t < loop_time:
+            yield self._signal[-n:]
 
     def start_thread(self):
         self._signal, _ = self._get_signal_for_interval()
