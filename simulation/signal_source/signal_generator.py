@@ -12,7 +12,6 @@ def signal_generator(fs, T, mu_imp1, f1_low, f1_high, s_noise, s_add):
     impact_ind1 = np.arange(100, nx, round(fs / ff1))
     impacts1[impact_ind1] = mu_imp1
     soi1 = impacts1 + noise
-    print(soi1.shape)
     dumping = 200
     imp = np.exp(-t * dumping)
     df = fs / nx
@@ -39,7 +38,9 @@ def signal_generator(fs, T, mu_imp1, f1_low, f1_high, s_noise, s_add):
     rob2 = np.random.randn(nx - 1)
     n_add = rob2 * s_add
     y = y + n_add
-    # print(impact_ind1)
+    # print(y, y**2)
+    # print(len(n_add))
+    # SNR = 10*np.log10(np.sum(y**2)/len(y)/(np.sum(n_add**2)/len(n_add)))
     return y, t[:-1]
 
 
@@ -48,6 +49,5 @@ if __name__ == '__main__':
                             f1_low=1500, f1_high=2500,
                             s_noise=0.1, s_add=0.7)
     import matplotlib.pyplot as plt
-
     plt.plot(t, y)
     plt.show()
