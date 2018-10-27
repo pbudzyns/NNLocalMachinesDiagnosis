@@ -4,7 +4,8 @@ import scipy.signal
 
 def signal_generator(fs=2**13, T=1, mu_imp1=0, f1_low=1500, f1_high=2500, s_noise=0.1, s_add=0.7):
     ff1 = 5
-    nx = fs * T
+    nx = int(fs * T)
+    # print(nx)
     t = np.arange(0, nx) / fs
     rob1 = np.random.randn(nx)
     noise = rob1 * s_noise
