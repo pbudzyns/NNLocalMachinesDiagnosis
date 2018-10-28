@@ -22,7 +22,7 @@ if __name__ == '__main__':
     signal_source.start_thread()
     print("Waiting for signal source...")
     time.sleep(3)
-    for signal in signal_source.get_signal(duration=1, loop_time=5):
+    for signal, t in signal_source.iterate(duration=1, loop_time=5):
         status = monitor.get_status(signal)
         proba = monitor.get_damage_proba(signal)
         print(f"Predicted {status} with proba {proba}, imp {signal_source.get_pulsation()}")
