@@ -2,19 +2,11 @@ import dash
 from dash.dependencies import Output, Event, Input
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly
-import random
 import plotly.graph_objs as go
 from collections import deque
 
 from simulation.signal_source.signal_source import SignalSource
 from simulation.analytics.monitor import Monitor
-
-# X = deque(maxlen=20)
-# Y = deque(maxlen=20)
-# X.append(1)
-# Y.append(1)
-
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -64,8 +56,7 @@ def update_prediction_graph():
               events=[Event('graph-update', 'interval')])
 def update_graph():
     global signal, t
-    # X.append(X[-1]+1)
-    # Y.append(Y[-1]+Y[-1]*random.uniform(-0.1, 0.1))
+
     signal, t = signal_source.get_signal(0.75)
 
     data = go.Scatter(x=t, y=signal, name='Scatter',
@@ -77,8 +68,6 @@ def update_graph():
 
 if __name__ == '__main__':
     signal_source = SignalSource(imp_amp=1.6, interval=1.5)
-    try:
-        signal_source.start_thread()
-        app.run_server(debug=True)
-    except:
-        pass
+    signal_source.start_thread()
+
+    app.run_server(debug=True)
