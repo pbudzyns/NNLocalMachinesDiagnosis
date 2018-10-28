@@ -22,6 +22,9 @@ class SignalSource:
     def decrease_pulsation(self, amount):
         self._imp_amp -= amount
 
+    def set_pulsation(self, value):
+        self._imp_amp = value
+
     def get_pulsation(self):
         return self._imp_amp
 
