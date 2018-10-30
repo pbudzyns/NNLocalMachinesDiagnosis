@@ -1,9 +1,13 @@
 import dash
-from dash.dependencies import Output, Event, Input, State
+from dash.dependencies import Output, Input, State
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_table_experiments as dt
+from dash_table_experiments import DataTable
 import plotly.graph_objs as go
 from collections import deque
+import pandas as pd
+import time
 
 from simulation.signal_source.signal_source import SignalSource
 from simulation.analytics.monitor import Monitor
@@ -11,6 +15,7 @@ from simulation.analytics.monitor import Monitor
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app.scripts.config.serve_locally = True
 # app.layout = html.Div([
 #               # html.H1('Signal Visualisation'),
 #
@@ -24,10 +29,24 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 #                          ])], style={'width': '35%', 'display': 'inline-block', 'vertical-align': 'middle'}),
 #                       ])
 
+def generate_table(dataframe, max_rows=10):
+    return html.Table(
+        # Header
+        [html.Tr([html.Th(col) for col in dataframe.columns])] +
+
+        # Body
+        [html.Tr([
+            html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+        ]) for i in range(min(len(dataframe), max_rows))]
+    )
+
+result_table = pd.DataFrame(columns = ['ID', 'Pulsation', 'Duration', 'Damage Probability', 'Classification'])
+# result_table.loc[0] = [0,0,0,0]
 app.layout = html.Div([
     html.Div(
         className="row",
         children=[
+            html.H1('Signal Visualisation'),
             html.Div(
                 className="six columns",
                 children=[
@@ -42,22 +61,24 @@ app.layout = html.Div([
                 className="six columns",
                 children=html.Div([
                     html.H6('Pulsation'),
-                    # html.Br(),
-                    dcc.Input(id='pulsation-source', placeholder='Enter a value ...', value='4.0', type='text'),
-                    html.Button('Refresh', id='refresh-button')
-                ], ),
+                    dcc.Input(id='pulsation-source', placeholder='Enter a value ...', value='2.5', type='text'),
+                    html.H6('Duration'),
+                    dcc.Input(id='duration-source', placeholder='Enter a value ...', value='0.5', type='text'),
+                    html.Br(),
+                    html.Button('Generate', id='refresh-button'),
+                ],
+                style={'margin': 'auto', 'position': 'absolute', 'top': '20%'}
+                ),
                 style={'width': '20%'}
-            )
+            ),
         ]
-    )
+    ),
+    html.Div(children=[
+                html.Div(id='table-handler', children=None, style={'margin': 'auto'} )
+        ],
+        style={'margin': 'auto', 'width': '50%'}
+    ),
 ])
-
-                       # dcc.Interval(id='graph-update', interval=1000),
-                       # dcc.Slider(id='imp_slider', min=0, max=5, step=0.1, value=0),
-                       # html.Div(id='slider-output-container'),
-                       # dcc.Graph(id='live-prediction-graph', animate=True),
-                       # dcc.Interval(id='prediction-graph-update', interval=1000)
-
 
 monitor = Monitor()
 monitor.load_model("../analytics/models/mlp_classifier_one_big.model")
@@ -66,24 +87,42 @@ h_proba = deque(maxlen=20)
 d_proba = deque(maxlen=20)
 n = deque(maxlen=20)
 n.append(0)
-# signal = [0, ]
+signal = [0,]
 # t = [0, ]
 
-# @app.callback(Output('live-graph', 'figure'), inputs=[Input('refresh-button', 'n_clicks')],
-#               state=[State('pulsation-source', 'value')])
-def plot_signal(n_clicks, pulsation):
+@app.callback(Output('live-graph', 'figure'),
+              inputs=[Input('refresh-button', 'n_clicks')],
+              state=[State('pulsation-source', 'value'), State('duration-source', 'value')])
+def plot_signal(n_clicks, pulsation, duration):
+    global signal
     try:
-        pulsation = float(pulsation)
+        pulsation = float(pulsation.replace(',', '.'))
+        duration = float(duration.replace(',', '.'))
     except ValueError:
         print("Couldn't get float from string")
         pulsation = 0.0
+        duration = 2.0
     # print('Signal prepared')
     # print('signal: \n', signal, '\n T: \n', t)
-    signal, t = signal_source.get_single_signal(pulsation=pulsation, duration=2)
+    signal, t = signal_source.get_single_signal(pulsation=pulsation, duration=duration)
     data = go.Scatter(x=list(t), y=list(signal), name='Signal', mode='lines')
-    layout = go.Layout(xaxis=dict(range=(min(t), max(t))), yaxis=dict(range=(-5, 5)))
+    layout = go.Layout(xaxis=dict(range=(min(t), max(t)), title='Time'), yaxis=dict(range=(-5, 5), title='Amplitude'))
 
     return {'data': [data], 'layout': layout}
+
+@app.callback(Output('table-handler', 'children'),
+              inputs=[Input('refresh-button', 'n_clicks')],
+              state=[State('pulsation-source', 'value'), State('duration-source', 'value')])
+def update_table(n_clicks, pulsation, duration):
+    global signal, result_table
+    time.sleep(0.1)
+    h_proba, d_proba = monitor.get_damage_proba(signal)
+    status = 'Damaged' if d_proba > h_proba else 'Health'
+    result_table.loc[-1] = [0, pulsation, duration, '%.3f'%(d_proba), status]  # adding a row
+    result_table.index = result_table.index + 1
+    result_table['ID'] += 1
+    result_table = result_table.sort_index()
+    return [generate_table(result_table)]
 #
 # @app.callback(Output('slider-output-container', 'children'),
 #               inputs=[Input('imp_slider', 'value')])
@@ -121,6 +160,10 @@ def plot_signal(n_clicks, pulsation):
 #     return {'data': [data], 'layout': go.Layout(xaxis=dict(range=[min(t), max(t)]),
 #                                                 yaxis=dict(range=[-5, 5]))}
 #
+
+# app.css.append_css({
+#     'external_url': 'https://codepen.io/chriddyp/pen/bWLwgP.css'
+# })
 
 if __name__ == '__main__':
 
