@@ -8,13 +8,20 @@ import plotly.graph_objs as go
 from collections import deque
 import pandas as pd
 import time
+import os
 
 from simulation.signal_source.signal_source import SignalSource
 from simulation.analytics.monitor import Monitor
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+hover_table = """\ntr:hover {background-color:#f5f5f5;}\n"""
+
+external_stylesheets = ['https://codepen.io/pawelbpw/pen/aRrJRj.css']
+
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+# abs_path = os.path.abspath(os.curdir)
+# print(abs_path)
+
 app.scripts.config.serve_locally = True
 # app.layout = html.Div([
 #               # html.H1('Signal Visualisation'),
@@ -37,7 +44,8 @@ def generate_table(dataframe, max_rows=10):
         # Body
         [html.Tr([
             html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-        ]) for i in range(min(len(dataframe), max_rows))]
+        ],) for i in range(min(len(dataframe), max_rows))],
+
     )
 
 result_table = pd.DataFrame(columns = ['ID', 'Pulsation', 'Duration', 'Damage Probability', 'Classification'])
@@ -46,7 +54,7 @@ app.layout = html.Div([
     html.Div(
         className="row",
         children=[
-            html.H1('Signal Visualisation'),
+            html.H1('Predictions Simulation'),
             html.Div(
                 className="six columns",
                 children=[
@@ -106,7 +114,8 @@ def plot_signal(n_clicks, pulsation, duration):
     # print('signal: \n', signal, '\n T: \n', t)
     signal, t = signal_source.get_single_signal(pulsation=pulsation, duration=duration)
     data = go.Scatter(x=list(t), y=list(signal), name='Signal', mode='lines')
-    layout = go.Layout(xaxis=dict(range=(min(t), max(t)), title='Time'), yaxis=dict(range=(-5, 5), title='Amplitude'))
+    layout = go.Layout(xaxis=dict(range=(min(t), max(t)), title='Time'), yaxis=dict(range=(-5, 5), title='Amplitude'),
+                        title='Signal')
 
     return {'data': [data], 'layout': layout}
 
