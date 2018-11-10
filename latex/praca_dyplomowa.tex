@@ -45,7 +45,7 @@
 	
 	Uszkodzenia lokalne są uszkodzeniami występującymi w łożyskach i przekładniach maszyn górniczych. Ich powstawanie uzależnione jest od zmiennych warunków eksploatacyjnych. Uszkodzenie w początkowym stanie obniża sprawność maszyny a ostatecznie może doprowadzić do jej unieruchomienia. Jest to szczególnie problematyczne ponieważ kopalnia dysponuje często jedną lub dwiema takimi maszynami, dodatkowo każda z nich pracuje wyłącznie na swoim stanowisku, nie są one przemieszczane. Detekcja uszkodzenia we wstępnym stadium rozwoju jest ważnym zagadnieniem ponieważ pozwala z wyprzedzeniem określić moment konserwacji urządzenia. 
 	
-	W detekcji uszkodzeń najczęściej wykorzystuje się diagnostykę wibroakustyczną. Metoda polega na umieszczeniu sensora na obudowie urządzenia, następnie następuje pomiar drgań. Otrzymany sygnał zawiera pewien zakres informacji na podstawie których możemy wnioskować o zaistnieniu uszkodzenia w urządzeniu. W przypadku opisywanych uszkodzeń okazuje się że ich obecność objawia się poprzez pulsacje w sygnale.
+		W detekcji uszkodzeń najczęściej wykorzystuje się diagnostykę wibroakustyczną. Metoda polega na umieszczeniu sensora na obudowie urządzenia, następnie następuje pomiar drgań. Otrzymany sygnał zawiera pewien zakres informacji na podstawie których możemy wnioskować o zaistnieniu uszkodzenia w urządzeniu. W przypadku opisywanych uszkodzeń okazuje się że ich obecność objawia się poprzez pulsacje w sygnale.
 	% Sygnał z pulsacjami i bez pulsacji
 	
 	Jednak w zależności od stopnia uszkodzenia pulsacje mogą mieć różne amplitudy, w przypadku wczesnego stadium rozwoju uszkodzenia najczęściej nie wystaja one ponad poziom szumu.
@@ -68,8 +68,30 @@
 	\section{Metodologia}
 	
 	\subsection{Wstępne przetwarzanie danych}
-	\cite{Python}
+	
 	\subsection{Zastosowanie sieci neuronowych}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=10cm]{images/perceptron_c.pdf}
+		\caption{Perceptron}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=10cm]{images/siec_c.pdf}
+		\caption{Perceptron wielowarstwowy}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=10cm]{images/workflow_c.pdf}
+		\caption{Schemat przebiegu pracy systemu wykrywania uszkodzenia}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=10cm]{images/walidacja_c.pdf}
+		\caption{Walidacja krzyżowa}
+	\end{figure}
+	
 	
 	% opis dzialania sieci neuronowej jak sadze
 	
@@ -135,12 +157,12 @@
 		\item Surowy sygnał podeście pierwsze
 			\subitem dane wejściowe: 4096
 			\subitem warstwy ukryte: 1000 - 500 - 200
-			\subitem liczba wag: w chuj
+			\subitem liczba wag: 
 		
 		\item Surowy sygnał podejście drugie
 			\subitem dane wejściowe: 4096
 			\subitem warstwy ukryte: 500 - 200
-			\subitem liczba wag: w chuj
+			\subitem liczba wag:
 			
 		\item Estymatory sygnału
 			\subitem dane wejściowe: 8
