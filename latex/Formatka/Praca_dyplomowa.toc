@@ -1,0 +1,8 @@
+\babel@toc {polish}{}
+\contentsline {chapter}{Wst\IeC {\k e}p}{3}{chapter*.2}
+\contentsline {chapter}{\numberline {1}Rozdzia\IeC {\l } pierwszy}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Podrozdzia\IeC {\l } pierwszy}{5}{section.1.1}
+\contentsline {section}{\numberline {1.2}Podrozdzia\IeC {\l } drugi}{6}{section.1.2}
+\contentsline {chapter}{\numberline {2}Definicje, lematy, twierdzenia, przyk\IeC {\l }ady i wnioski}{7}{chapter.2}
+\contentsline {chapter}{Podsumowanie}{9}{chapter*.6}
+\contentsline {chapter}{Dodatek}{11}{chapter*.7}
