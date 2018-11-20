@@ -54,7 +54,7 @@ app.layout = html.Div([
     html.Div(
         className="row",
         children=[
-            html.H1('Predictions Simulation'),
+            html.H1('Damage Detection Simulator'),
             html.Div(
                 className="six columns",
                 children=[
@@ -99,9 +99,10 @@ signal = [0,]
 # t = [0, ]
 
 @app.callback(Output('live-graph', 'figure'),
-              inputs=[Input('refresh-button', 'n_clicks')],
+              inputs=[Input('refresh-button', 'n_clicks'), Input('pulsation-source', 'n_submit'),
+                      Input('duration-source', 'n_submit')],
               state=[State('pulsation-source', 'value'), State('duration-source', 'value')])
-def plot_signal(n_clicks, pulsation, duration):
+def plot_signal(n_clicks, n_submit, n_submit2, pulsation, duration):
     global signal
     try:
         pulsation = float(pulsation.replace(',', '.'))
@@ -120,9 +121,10 @@ def plot_signal(n_clicks, pulsation, duration):
     return {'data': [data], 'layout': layout}
 
 @app.callback(Output('table-handler', 'children'),
-              inputs=[Input('refresh-button', 'n_clicks')],
+              inputs=[Input('refresh-button', 'n_clicks'), Input('pulsation-source', 'n_submit'),
+                      Input('duration-source', 'n_submit')],
               state=[State('pulsation-source', 'value'), State('duration-source', 'value')])
-def update_table(n_clicks, pulsation, duration):
+def update_table(n_clicks, n_submit, n_submit2, pulsation, duration):
     global signal, result_table
     time.sleep(0.1)
     h_proba, d_proba = monitor.get_damage_proba(signal)

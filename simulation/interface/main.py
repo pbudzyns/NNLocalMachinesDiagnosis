@@ -20,7 +20,7 @@ app.layout = html.Div([dcc.Graph(id='live-graph', animate=True),
                        ])
 
 monitor = Monitor()
-monitor.load_model("../analytics/models/mlp_classifier.model")
+monitor.load_model("../analytics/models/mlp_classifier_one_big.model")
 h_proba = deque(maxlen=20)
 d_proba = deque(maxlen=20)
 n = deque(maxlen=20)
@@ -70,4 +70,4 @@ if __name__ == '__main__':
     signal_source = SignalSource(imp_amp=1.6, interval=1.5)
     signal_source.start_thread()
 
-    app.run_server(debug=True)
+    app.run_server(port=8080, host="0.0.0.0")

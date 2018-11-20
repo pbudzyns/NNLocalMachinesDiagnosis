@@ -38,6 +38,9 @@ class SignalSource:
         n = int((duration / self._max_time) * self._total_signal_len)
         return list(self._signal)[-n:], list(self._time)[-n:]
 
+    def get_single_signal(self, pulsation, duration):
+        return signal_generator(mu_imp1=pulsation, T=duration)
+
     def start_thread(self):
         # self._signal, _ = self._get_signal_for_interval()
         thread = Thread(target=self._generating_signal)

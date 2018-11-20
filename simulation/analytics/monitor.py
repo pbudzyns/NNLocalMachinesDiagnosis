@@ -14,7 +14,7 @@ class Monitor:
 
     def get_damage_proba(self, signal):
         data = self._prepare_input(signal)
-        return self._model.predict_proba([data])
+        return self._model.predict_proba([data])[0]
 
     def _prepare_input(self, signal):
         return self._preprocessing.transform(signal)[1:]

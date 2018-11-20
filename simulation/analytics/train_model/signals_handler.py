@@ -72,4 +72,4 @@ class SignalsHandler:
 
     def _split_into_train_test(self):
         self.learning_data, self.testing_data, self.learning_labels, self.testing_labels = \
-            train_test_split(self.data[:, 1:], self.data[:, 0], test_size=0.3)
+            train_test_split(self.data[:, 1:], self.data[:, 0], test_size=0.2)
