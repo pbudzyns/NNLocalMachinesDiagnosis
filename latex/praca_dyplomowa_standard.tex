@@ -32,7 +32,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[inzynierska]{pwr_wmat_praca_dyplomowa}
-\usepackage{hyperref}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %              DANE DO PRACY
 %
@@ -123,7 +123,7 @@
 \newtheorem{example}[theorem]{Przykład}
 \newtheorem{note}[theorem]{Uwaga}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\usepackage{cite}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -140,7 +140,7 @@
 {\backmatter \chapter{Wstęp}}
 
 %\chapter{Uszkodzenia lokalne oraz ich wykrywanie}
-Tematem pracy jest wykorzystanie sieci neuronowych w problemie wykrywania uszkodzeń lokalnych w maszynach górniczych. Zadanie polega na przetworzeniu sygnału diagnostycznego oraz dokonaniu na jego podstawie decyzji o możliwości wystąpienia uszkodzenia w mechanizmach maszyny górniczej. Uszkodzeniem takim mogą być wewnętrzne pęknięcia, ubytki, wykruszone zęby kół zębatych. Przykład uszkodzonego elementu zaprezentowano na ilustracji \ref{uszkodzenie}.
+Tematem pracy jest wykorzystanie sieci neuronowych w problemie wykrywania uszkodzeń lokalnych w maszynach górniczych. Zadanie polega na przetworzeniu sygnału diagnostycznego oraz dokonaniu na jego podstawie decyzji o możliwości wystąpienia uszkodzenia w mechanizmach maszyny górniczej. Uszkodzeniem takim mogą być\cite{einstein} wewnętrzne pęknięcia, ubytki, wykruszone zęby kół zębatych. Przykład uszkodzonego elementu zaprezentowano na ilustracji \ref{uszkodzenie}.
 \begin{figure}[ht]
 	
 	\centering
@@ -199,7 +199,7 @@ Wraz z upływem czasu pojawiają się kolejne modele neuronów i rodzaje sieci n
 
 Głębokie architektury sieci konwolucyjnych bez problemu radzą sobie z przetwarzaniem obrazów. Wykrywanie obiektów w czasie rzeczywistym \cite{ren2015faster}, rozpoznawanie twarzy \cite{lin1997face} czy prowadzenie pojazdu \cite{bojarski2016end} przez komputer nie wydaje się być dzisiaj niczym zaskakującym. Sieci takie pomagają również wykrywać zmiany nowotworowe \cite{nnnature} na podstawie zdjęć lub opisywać fotografie \cite{xu2015show}.
 
-Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (\textit{ang. natural language processing}) zajmuje się opracowaniem metod pozwalającym "rozumieć" maszynom nasz język \cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim smartfony potrafią przewidywać zakończenie zdania \cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
+Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (\textit{ang. natural language processing}) zajmuje się opracowaniem metod pozwalającym rozumieć maszynom nasz język \cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim smartfony potrafią przewidywać zakończenie zdania \cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
 
 Wiedząc o tak zaawansowanych zastosowaniach i mając dowód skuteczności sieci neuronowych przeprowadzono eksperyment mający na celu zbadanie ich skuteczności w problemie wykrywania uszkodzeń lokalnych w sygnałach diagnostycznych pochodzących z maszyn górniczych. Dalsza część pracy opisuje wykorzystane metody, proces dochodzenia do rozwiązania oraz zastosowanie opracowanego modelu w systemie potrafiącym monitorować stan maszyny w czasie rzeczywistym.
 
@@ -531,5 +531,6 @@ Po decyzji o użyciu estymatorów jako danych uczących należy przeprowadzić e
 % i postępujemy tak jak wcześniej.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % w nawiasie klamrowym wpisujemy nazwę pliku z bibliografią w formacie .bib
-\bibliografia{bibliografia22} 
+\bibliography{bibliografia_backup} 
+\bibliographystyle{bibliografia_styl}
 \end{document}
