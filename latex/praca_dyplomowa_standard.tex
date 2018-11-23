@@ -1,3 +1,4 @@
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Niniejszy plik przedstawia przykładowy skład 
 % pracy dyplomowej na Wydziale Matematyki PWr. 
@@ -31,6 +32,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[inzynierska]{pwr_wmat_praca_dyplomowa}
+\usepackage{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %              DANE DO PRACY
 %
@@ -193,16 +195,13 @@ Sieci neuronowe można zdefiniować jako struktury matematyczne realizujące obl
 Obecnie sieci neuronowe są jedną z prężnie rozwijających się technologii nauczania maszynowego i szeroko wykorzystywane w pracach nad sztuczną inteligencją.
 Prężny rozwój dziedziny zapoczątkowało wynalezienie sztucznego perceptronu w 1957r. Był to model sztucznego neuronu pozwalającego na binarną klasyfikację liniowo separowalnych danych.
 
- Wraz z upływem czasu pojawiają się kolejne modele neuronów i rodzaje sieci neuronowych. Dzisiaj problemy takie jak grupowanie danych, wykrywanie struktur, regresja nie stanowią dla sieci żadnego problemu. Potrafią one o wiele więcej. Wraz ze wzrostem mocy obliczeniowej komputerów oraz możliwości dokonywania na procesorach kart graficznych (GPU) możliwe stało się wielowarstwowych architektur a wielu węzłach, tak zwanych głębokich sieci neuronowych (ang. deep neural networks). Te skomplikowane struktury potrafią o wiele więcej, a każdego dnia pojawia się więcej pomysłów na ich zastosowanie. 
+Wraz z upływem czasu pojawiają się kolejne modele neuronów i rodzaje sieci neuronowych. Dzisiaj problemy takie jak grupowanie danych, wykrywanie struktur, regresja nie stanowią dla sieci żadnego problemu. Potrafią one o wiele więcej. Wraz ze wzrostem mocy obliczeniowej komputerów oraz możliwości dokonywania na procesorach kart graficznych (GPU) możliwe stało się wielowarstwowych architektur a wielu węzłach, tak zwanych głębokich sieci neuronowych (\textit{ang. deep neural networks}). Te skomplikowane struktury potrafią o wiele więcej, a każdego dnia pojawia się więcej pomysłów na ich zastosowanie. 
+
 Głębokie architektury sieci konwolucyjnych bez problemu radzą sobie z przetwarzaniem obrazów. Wykrywanie obiektów w czasie rzeczywistym \cite{ren2015faster}, rozpoznawanie twarzy \cite{lin1997face} czy prowadzenie pojazdu \cite{bojarski2016end} przez komputer nie wydaje się być dzisiaj niczym zaskakującym. Sieci takie pomagają również wykrywać zmiany nowotworowe \cite{nnnature} na podstawie zdjęć lub opisywać fotografie \cite{xu2015show}.
 
-Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (ang. natural language processing) zajmuje się opracowaniem metod pozwalającym "rozumieć" maszynom nasz język \cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim smartfony potrafią przewidywać zakończenie zdania \cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
-%\\
-%Chociaż jest to stosunkowo nowa technologia, znalazła już ona szereg zastosowań w wielu dziedzinach. Do najpopularniejszych zastosowań należy przetwarzanie obrazu takie jak rozpoznawanie twarzy, detekcja obiektów, wykrywanie zmian nowotworowych \cite{nnnature}, przetwarzanie mowy \cite{nnspeech} czy też autokorekta i podpowiadanie słów w klawiaturach smartfonów \cite{nngboard}.
-%{\Huge  tutaj trzeba dużo dużo więcej napisać }
+Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (\textit{ang. natural language processing}) zajmuje się opracowaniem metod pozwalającym "rozumieć" maszynom nasz język \cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim smartfony potrafią przewidywać zakończenie zdania \cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
 
-
-%\chapter{Metodologia}
+Wiedząc o tak zaawansowanych zastosowaniach i mając dowód skuteczności sieci neuronowych przeprowadzono eksperyment mający na celu zbadanie ich skuteczności w problemie wykrywania uszkodzeń lokalnych w sygnałach diagnostycznych pochodzących z maszyn górniczych. Dalsza część pracy opisuje wykorzystane metody, proces dochodzenia do rozwiązania oraz zastosowanie opracowanego modelu w systemie potrafiącym monitorować stan maszyny w czasie rzeczywistym.
 
 \chapter{Metodologia}
 Zakres wykonanej pracy obejmuje poszukiwanie optymalnego rozwiązania dla postawionego problemu. Na ten problem składają się wybór i przygotowanie danych uczących model oraz zaprojektowanie skutecznego modelu. 
@@ -260,7 +259,7 @@ tutaj schemat kompletnego działąnia z podsumowaniem tego co bylo wczesniej i o
 Rysunek \ref{proces-caly} przedstawia schemat działania
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=16cm]{images/total_proc.pdf}
+	\includegraphics[scale=0.7]{images/total_proc.pdf}
 	\caption{Schemat przebiegu pracy systemu wykrywania uszkodzenia}
 	\label{proces-caly}
 \end{figure}
@@ -270,7 +269,7 @@ Rysunek \ref{proces-caly} przedstawia schemat działania
 Finalnym zadaniem jest stworzenie całości systemu monitorującego który dokonywałby predykcji na postawie wprowadzonego sygnału. 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=14cm]{images/workflow_c.pdf}
+	\includegraphics[scale=0.7]{images/workflow_c.pdf}
 	\caption{Schemat przebiegu pracy systemu wykrywania uszkodzenia}
 	\label{proces-koncowy}
 \end{figure}
