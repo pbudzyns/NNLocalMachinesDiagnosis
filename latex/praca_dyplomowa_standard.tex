@@ -97,13 +97,13 @@
 %
 % Krótkie streszczenia po polsku i angielsku
 % - nie dłuższe niż 530 znaków.
-\streszczenie{Celem pracy jest zastosowanie sieci neuronowych do analizy sygnałów drganiowych w celu wykrywania uszkodzeń lokalnych w maszynach górniczych. Zakres pracy obejmuje opracowanie nowych metod i ich zastosowanie}
-\streszczenieang{sieci neuronowe, nauczanie maszynowe, szeregi czasowe,}
+\streszczenie{Celem pracy jest zastosowanie sieci neuronowych do analizy sygnałów drganiowych w celu wykrywania uszkodzeń lokalnych w maszynach górniczych. Zakres pracy obejmuje opracowanie nowych metod i ich zastosowanie.}
+\streszczenieang{Thesis work base on neural network usage in the problem of diagnostic signals analysis in the problem of local damage detection in mining machines. The scope contains developing new methods and their usage. }
 %
 % Podajemy najważniejsze słowa kluczowe po polsku i angielsku
 % - w obu przypadkach, nie więcej niż 150 znaków.
-\slowakluczowe{tutaj podajemy najważniejsze słowa kluczowe (łącznie nie powinny być dłuższe niż 150 znaków).}  
-\slowakluczoweang{tutaj podajemy najważniejsze słowa kluczowe w języku angielskim (łącznie nie powinny być dłuższe niż 150 znaków)}
+\slowakluczowe{sieci~neuronowe, nauczanie~maszynowe, maszyny~górnicze, szeregi~czasowe.}  
+\slowakluczoweang{neural~networks, machine~learning, mining machines, time~series.}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -153,7 +153,7 @@ Tematem pracy jest wykorzystanie sieci neuronowych w problemie wykrywania uszkod
 
 
 \section{Opis problemu}
-Uszkodzenia lokalne są uszkodzeniami występującymi w łożyskach i przekładniach maszyn górniczych. Ich powstawanie uzależnione jest od zmiennych warunków eksploatacyjnych \cite{adaptacyjne}. Uszkodzenie w początkowym stanie obniża sprawność maszyny a ostatecznie może doprowadzić do jej unieruchomienia. Jest to szczególnie problematyczne ponieważ kopalnia dysponuje często jedną lub dwiema takimi maszynami, dodatkowo każda z nich pracuje wyłącznie na swoim stanowisku, nie są one przemieszczane.
+Uszkodzenia lokalne są uszkodzeniami występującymi w łożyskach i przekładniach maszyn górniczych. Ich powstawanie uzależnione jest od zmiennych warunków eksploatacyjnych\cite{adaptacyjne}. Uszkodzenie w początkowym stanie obniża sprawność maszyny a ostatecznie może doprowadzić do jej unieruchomienia. Jest to szczególnie problematyczne ponieważ kopalnia dysponuje często jedną lub dwiema takimi maszynami, dodatkowo każda z nich pracuje wyłącznie na swoim stanowisku, nie są one przemieszczane.
  Detekcja uszkodzenia we wstępnym stadium rozwoju jest ważnym zagadnieniem ponieważ pozwala z wyprzedzeniem określić moment konserwacji urządzenia. W detekcji uszkodzeń najczęściej wykorzystuje się diagnostykę wibroakustyczną. Przykład badania maszyny tą techniką zaprezentowano na ilustracji \ref{sensory}. Metoda polega na umieszczeniu sensora na obudowie urządzenia, następnie następuje pomiar drgań. Otrzymany sygnał zawiera pewien zakres informacji na podstawie których możemy wnioskować o zaistnieniu uszkodzenia w urządzeniu. W przypadku opisywanych uszkodzeń okazuje się że ich obecność objawia się poprzez cykliczne impulsy w sygnale.
 % Sygnał z pulsacjami i bez pulsacji
 \begin{figure}[ht]
@@ -179,13 +179,13 @@ Można zatem stwierdzić że detekcja uszkodzenia, z punktu widzenia matematyki,
 
 \section{State of the art}
 Analiza sygnałów diagnostycznych pochodzących z urządzeń mechanicznych jest szeroko badanym zagadnieniem inżynierskim. W tym celu wykorzystuje się szereg technik a dzięki postępującym pracom zakres dostępnych narzędzi stale się powiększa. Wiedząc, że uszkodzenie objawia się modulacjami częstotliwościowymi i amplitudowymi. Rzeczą oczywistą staje się wykorzystanie narzędzi znanych z analizy sygnałów.
-Interesującą techniką jest zautomatyzowane wyznaczanie pasma informacyjnego, zawierającego informacje o uszkodzeniu, z zastosowaniem filtrowania falkowego \cite{linandzuo}. 
+Interesującą techniką jest zautomatyzowane wyznaczanie pasma informacyjnego, zawierającego informacje o uszkodzeniu, z zastosowaniem filtrowania falkowego\cite{linandzuo}. 
 
-Podejście zaproponowane przez Antoni \cite{antoni} polega na obliczeniu kurtozy dla poszczególnych częstotliwości wziętych ze spektrogramu. Pozwala to na użycie ich w dalszej kolejności do wyznaczenia momentów wysokiej zmienności i ich lokalizacji w dziedzinie częstotliwości. Rozwinięciem tego podejścia jest wykorzystanie diadycznej(??) dekompozycji sygnału, również używając kurtozy do wyznaczenia pasma częstotliwości. Podejście to nazwane kurtogramem również zostało rozszerzone przez kolejnych naukowców.???\cite{antoni2}
+Podejście zaproponowane przez Antoni\cite{antoni} polega na obliczeniu kurtozy dla poszczególnych częstotliwości wziętych ze spektrogramu. Pozwala to na użycie ich w dalszej kolejności do wyznaczenia momentów wysokiej zmienności i ich lokalizacji w dziedzinie częstotliwości. Rozwinięciem tego podejścia jest wykorzystanie diadycznej(??) dekompozycji sygnału, również używając kurtozy do wyznaczenia pasma częstotliwości. Podejście to nazwane kurtogramem również zostało rozszerzone przez kolejnych naukowców.???\cite{antoni2}
 
-Urban \cite{urban} wykorzystuje rozkład intensywności modulacji do wyznaczania pasma informacyjnego. Podejście bazuje na założeniu istnienia nieliniowych zjawisk (???) (non-linear phenomena) powodowanych przez uszkodzenia lokalne. Dają się one modelować przez modulację amplitudową. 
+Urban\cite{urban} wykorzystuje rozkład intensywności modulacji do wyznaczania pasma informacyjnego. Podejście bazuje na założeniu istnienia nieliniowych zjawisk (???) (non-linear phenomena) powodowanych przez uszkodzenia lokalne. Dają się one modelować przez modulację amplitudową. 
 
-Lub też użycie testu Andersona-Derlinga do obliczenia odległości od rozkładu normalnego, okazuje się że sygnał pochodzący z uszkodzonej maszyny jest daleki od takiego rozkładu. \cite{wylomanska} 
+Lub też użycie testu Andersona-Derlinga do obliczenia odległości od rozkładu normalnego, okazuje się że sygnał pochodzący z uszkodzonej maszyny jest daleki od takiego rozkładu\cite{wylomanska}.
 %prztumaczyc dokument ze strony wylomanskiej 
 %{\Huge tutaj jakies odleglosci od rozkladu normalnego, spektrogramy itd}
 
@@ -197,9 +197,9 @@ Prężny rozwój dziedziny zapoczątkowało wynalezienie sztucznego perceptronu 
 
 Wraz z upływem czasu pojawiają się kolejne modele neuronów i rodzaje sieci neuronowych. Dzisiaj problemy takie jak grupowanie danych, wykrywanie struktur, regresja nie stanowią dla sieci żadnego problemu. Potrafią one o wiele więcej. Wraz ze wzrostem mocy obliczeniowej komputerów oraz możliwości dokonywania na procesorach kart graficznych (GPU) możliwe stało się wielowarstwowych architektur a wielu węzłach, tak zwanych głębokich sieci neuronowych (ang. \textit{deep neural networks}). Te skomplikowane struktury potrafią o wiele więcej, a każdego dnia pojawia się więcej pomysłów na ich zastosowanie. 
 
-Głębokie architektury sieci konwolucyjnych bez problemu radzą sobie z przetwarzaniem obrazów. Wykrywanie obiektów w czasie rzeczywistym \cite{ren2015faster}, rozpoznawanie twarzy \cite{lin1997face} czy prowadzenie pojazdu \cite{bojarski2016end} przez komputer nie wydaje się być dzisiaj niczym zaskakującym. Sieci takie pomagają również wykrywać zmiany nowotworowe na podstawie zdjęć \cite{nnnature} lub opisywać fotografie \cite{xu2015show}.
+Głębokie architektury sieci konwolucyjnych bez problemu radzą sobie z przetwarzaniem obrazów. Wykrywanie obiektów w czasie rzeczywistym\cite{ren2015faster}, rozpoznawanie twarzy\cite{lin1997face} czy prowadzenie pojazdu\cite{bojarski2016end} przez komputer nie wydaje się być dzisiaj niczym zaskakującym. Sieci takie pomagają również wykrywać zmiany nowotworowe na podstawie zdjęć\cite{nnnature} lub opisywać fotografie\cite{xu2015show}.
 
-Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (ang. \textit{natural language processing}) zajmuje się opracowaniem metod pozwalającym rozumieć maszynom nasz język \cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim maszyny potrafią przewidywać zakończenie zdania \cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
+Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (ang. \textit{natural language processing}) zajmuje się opracowaniem metod pozwalającym rozumieć maszynom nasz język\cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim maszyny potrafią przewidywać zakończenie zdania\cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
 
 Wiedząc o tak zaawansowanych zastosowaniach i mając dowód skuteczności sieci neuronowych przeprowadzono eksperyment mający na celu zbadanie ich skuteczności w problemie wykrywania uszkodzeń lokalnych w sygnałach diagnostycznych pochodzących z maszyn górniczych. Dalsza część pracy opisuje wykorzystane metody, proces dochodzenia do rozwiązania oraz zastosowanie opracowanego modelu w systemie potrafiącym monitorować stan maszyny w czasie rzeczywistym.
 
@@ -219,7 +219,7 @@ Symulowanie sygnału diagnostycznego realizowane jest poprzez funkcję napisaną
 Metoda polega na wygenerowaniu zaszumionego sygnału o charakterystyce zbliżonej do sygnałów diagnostycznych a następnie dodaniu do niego cyklicznych impulsów o średniej amplitudzie zadanej przez odpowiedni parametr. 
 Jako rezultat funkcja zwraca wektor danych o długości proporcjonalnej do częstotliwości próbkowania i czasu trwania sygnału.
 
-Dalsza praca oparta jest na wygenerowanym zbiorze danych który zawiera sygnały z pulsacjami o różnej sile. Dane o różnych wartościach stosunku sygnału do szumu (SNR,~ang.~\textit{signal-to-noise ratio}) umożliwią sieci nauczenie się różnych przypadków. W~tabeli~\ref{tab:dataset} przedstawiono szczegółowy ich wykaz. SNR najczęściej wyrażany jest jako stosunek mocy sygnału do mocy szumu \cite{johnson2006signal}. Na potrzeby pracy zostanie zdefiniowany następująco.
+Dalsza praca oparta jest na wygenerowanym zbiorze danych który zawiera sygnały z pulsacjami o różnej sile. Dane o różnych wartościach stosunku sygnału do szumu (SNR,~ang.~\textit{signal-to-noise ratio}) umożliwią sieci nauczenie się różnych przypadków. W~tabeli~\ref{tab:dataset} przedstawiono szczegółowy ich wykaz. SNR najczęściej wyrażany jest jako stosunek mocy sygnału do mocy szumu\cite{johnson2006signal}. Na potrzeby pracy zostanie zdefiniowany następująco.
 \begin{equation}
 	SNR = \frac{\sigma_{imp}}{\sigma_{noise}}.
 \end{equation}
@@ -297,9 +297,27 @@ W trakcie dalszych badań odkryto że połączenie wielu perceptronów pozwala n
 
 \section{Trening sieci neuronowej}
 
-tutaj schemat kompletnego działąnia z podsumowaniem tego co bylo wczesniej i opisem jak dziala
-Rysunek \ref{proces-caly} przedstawia schemat działania
+Trening sieci neuronowej bazuje na minimalizacji popełnianych przez nią błędów. Podczas tego procesu sygnały ze zbioru uczącego podawane są na wejście sieci. Ponieważ posiadamy wiedzę o tym czy dany sygnał pochodzi ze sprawnej lub uszkodzonej maszyny możliwe jest porównanie otrzymanego wyniku ze stanem faktycznym. W przypadku różnicy wartości predykowanej i rzeczywistej rozpoczyna się proces dostrajania wag w połączeniach węzłów sieci neuronowej. Do wyznaczania wag w sieciach typu perceptron wielowarstwowy stosuje się zazwyczaj sekwencyjne algorytmy gradientowe. Prosty algorytm tego typu działa w następujący sposób: Posiadając wektor wag $w^{(i)}$ w $(i)$-tej iteracji, wektor wag w iteracji $(i+1)$-ej zmieniamy następująco:
+\begin{equation}
+	w^{(i+1)} = w^{(i)} + \Delta w,
+\end{equation}
+gdzie $w^{(i)}$ jest starym a $w^{(i+1)}$ nowym wektorem wag, oraz
+\begin{equation}
+	\Delta w = -\alpha \frac{\delta E}{\delta w},
+\end{equation}
+gdzie $\alpha > 0$ jest przyjętym współczynnikiem nauczania a $E$ popełnionym błędem.
 
+
+Najpopularniejsza metoda dla wielowarstwowych perceptronów, oraz wykorzystany w pracy to algorytm propagacji wstecznej (ang. \textit{backpropagation algorithm})\cite{rumelhart1986learning} zaproponowany w 1986 roku przez Runmelharta, Hintona i Williamsa. Algorytm ten wziął swoją nazwę od sposobu działania, propagowania błędu w tył sieci. Ogólnie mówiąc wagi dla warstwy $n$ optymalizowane są na podstawie błędu popełnionego przez warstwę $n+1$. Ogólny schemat postępowania można zapisać następująco. 
+\begin{enumerate}
+	\item Losowa inicjalizacja wag w sieci neuronowej
+	\item Obliczenie odpowiedzi sieci dla sygnału ze zbioru uczącego
+	\item Obliczenie błędu dokonanego przez neurony wyjściowe
+	\item Propagowanie błędu do warstw wcześniejszych
+	\item Modyfikacja wag na podstawie wartości błędu.
+\end{enumerate}
+
+W pracy wykorzystano implementację perceptronu wielowarstwowego wraz z algorytmem wstecznej propagacji zawartą w bibliotece \textit{Scikit-learn}\cite{skleaarn} języka Python. 
 
 \section{Testowanie skuteczności modelu}
 Opracowanie optymalnego modelu wymaga istnienia sposobu na jego przetestowanie. Proces badania skuteczności modelu przedstawiono na rysunku \ref{proces-caly}. Proces opiera się na podziale zbioru danych na rozłączne zbiory uczący i testujący. Po wytrenowaniu sieci na zbiorze uczącym dokonujemy predykcji dla zbioru testowego przy pomocy wyuczonej sieci neuronowej. W kolejnym kroku następuje porównanie wyników do wartości rzeczywistej i wyliczenie statystyk dotyczących skuteczności modelu. 
@@ -375,7 +393,6 @@ Skuteczność rozwiązania silnie zależy od użytej sieci. Projektowanie sieci 
 \end{itemize}
 
 Nie istnieje skuteczna metoda doboru parametrów, przy zastosowaniu złożonych sieci badacze najczęściej polegają na swoim doświadczeniu oraz intuicji. Na potrzeby tego zadania przeprowadzono szereg eksperymentów mających na celu określić najskuteczniejszą sieć do wykonania postawionego zadania. Każdy model przetestowano według metod przedstawionych w poprzednim rozdziale. 
-
 
 \section{Zależność od danych wejściowych}
 Pierwszy eksperyment będzie postawą do decyzji o tym jakich danych należy użyć do uczenia sieci. Należy porównać jak uczy się sieć w zależności od danych wejściowych. Porównane zostaną dwa podejścia: użycie surowego sygnału oraz wstępnie przetworzonego. 
