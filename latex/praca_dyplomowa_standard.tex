@@ -140,7 +140,7 @@
 {\backmatter \chapter{Wstęp}}
 
 %\chapter{Uszkodzenia lokalne oraz ich wykrywanie}
-Tematem pracy jest wykorzystanie sieci neuronowych w problemie wykrywania uszkodzeń lokalnych w maszynach górniczych. Zadanie polega na przetworzeniu sygnału diagnostycznego oraz dokonaniu na jego podstawie decyzji o możliwości wystąpienia uszkodzenia w mechanizmach maszyny górniczej. Uszkodzeniem takim mogą być\cite{einstein} wewnętrzne pęknięcia, ubytki, wykruszone zęby kół zębatych. Przykład uszkodzonego elementu zaprezentowano na ilustracji \ref{uszkodzenie}.
+Tematem pracy jest wykorzystanie sieci neuronowych w problemie wykrywania uszkodzeń lokalnych w maszynach górniczych. Zadanie polega na przetworzeniu sygnału diagnostycznego oraz dokonaniu na jego podstawie decyzji o możliwości wystąpienia uszkodzenia w mechanizmach maszyny górniczej. Uszkodzeniem takim mogą być wewnętrzne pęknięcia, ubytki, wykruszone zęby kół zębatych. Przykład uszkodzonego elementu zaprezentowano na ilustracji \ref{uszkodzenie}.
 \begin{figure}[ht]
 	
 	\centering
@@ -195,19 +195,66 @@ Sieci neuronowe można zdefiniować jako struktury matematyczne realizujące obl
 Obecnie sieci neuronowe są jedną z prężnie rozwijających się technologii nauczania maszynowego i szeroko wykorzystywane w pracach nad sztuczną inteligencją.
 Prężny rozwój dziedziny zapoczątkowało wynalezienie sztucznego perceptronu w 1957r. Był to model sztucznego neuronu pozwalającego na binarną klasyfikację liniowo separowalnych danych.
 
-Wraz z upływem czasu pojawiają się kolejne modele neuronów i rodzaje sieci neuronowych. Dzisiaj problemy takie jak grupowanie danych, wykrywanie struktur, regresja nie stanowią dla sieci żadnego problemu. Potrafią one o wiele więcej. Wraz ze wzrostem mocy obliczeniowej komputerów oraz możliwości dokonywania na procesorach kart graficznych (GPU) możliwe stało się wielowarstwowych architektur a wielu węzłach, tak zwanych głębokich sieci neuronowych (\textit{ang. deep neural networks}). Te skomplikowane struktury potrafią o wiele więcej, a każdego dnia pojawia się więcej pomysłów na ich zastosowanie. 
+Wraz z upływem czasu pojawiają się kolejne modele neuronów i rodzaje sieci neuronowych. Dzisiaj problemy takie jak grupowanie danych, wykrywanie struktur, regresja nie stanowią dla sieci żadnego problemu. Potrafią one o wiele więcej. Wraz ze wzrostem mocy obliczeniowej komputerów oraz możliwości dokonywania na procesorach kart graficznych (GPU) możliwe stało się wielowarstwowych architektur a wielu węzłach, tak zwanych głębokich sieci neuronowych (ang. \textit{deep neural networks}). Te skomplikowane struktury potrafią o wiele więcej, a każdego dnia pojawia się więcej pomysłów na ich zastosowanie. 
 
 Głębokie architektury sieci konwolucyjnych bez problemu radzą sobie z przetwarzaniem obrazów. Wykrywanie obiektów w czasie rzeczywistym \cite{ren2015faster}, rozpoznawanie twarzy \cite{lin1997face} czy prowadzenie pojazdu \cite{bojarski2016end} przez komputer nie wydaje się być dzisiaj niczym zaskakującym. Sieci takie pomagają również wykrywać zmiany nowotworowe \cite{nnnature} na podstawie zdjęć lub opisywać fotografie \cite{xu2015show}.
 
-Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (\textit{ang. natural language processing}) zajmuje się opracowaniem metod pozwalającym rozumieć maszynom nasz język \cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim smartfony potrafią przewidywać zakończenie zdania \cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
+Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (ang. \textit{natural language processing}) zajmuje się opracowaniem metod pozwalającym rozumieć maszynom nasz język \cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim maszyny potrafią przewidywać zakończenie zdania \cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
 
 Wiedząc o tak zaawansowanych zastosowaniach i mając dowód skuteczności sieci neuronowych przeprowadzono eksperyment mający na celu zbadanie ich skuteczności w problemie wykrywania uszkodzeń lokalnych w sygnałach diagnostycznych pochodzących z maszyn górniczych. Dalsza część pracy opisuje wykorzystane metody, proces dochodzenia do rozwiązania oraz zastosowanie opracowanego modelu w systemie potrafiącym monitorować stan maszyny w czasie rzeczywistym.
 
 \chapter{Metodologia}
 Zakres wykonanej pracy obejmuje poszukiwanie optymalnego rozwiązania dla postawionego problemu. Na ten problem składają się wybór i przygotowanie danych uczących model oraz zaprojektowanie skutecznego modelu. 
-W kolejnych krokach opisano narzędzia i techniki wykorzystane w tym celu. Ponieważ sieci neuronowe wymagają znaczącej ilości danych, a~ich zdobycie w przypadku zaawansowanych maszyn górniczych jest problematyczne, pracę należało zacząć od stworzenia sytemu symulowania sygnałów o zbliżonych cechach oraz wygenerowania zbioru danych (\textit{ang. dataset}). Następnie poruszony zostanie temat tak zwanej ekstrakcji cech, wstępnej obróbki danych w celu stworzenia najlepiej opisujących je cech. Finalnie możliwe jest przystąpienie do projektowania, trenowania i testowania sieci w celu stworzenia możliwie skutecznego modelu.
+W kolejnych krokach opisano narzędzia i techniki wykorzystane w tym celu. Ponieważ sieci neuronowe wymagają znaczącej ilości danych, a~ich zdobycie w przypadku zaawansowanych maszyn górniczych jest problematyczne, pracę należało zacząć od stworzenia sytemu symulowania sygnałów o charakterystyce zbliżonej do sygnału diagnostycznego oraz wygenerowania zbioru danych (ang. \textit{dataset}). Następnie poruszony zostanie temat tak zwanej ekstrakcji cech, wstępnej obróbki danych w celu stworzenia najlepiej opisujących je cech. Finalnie możliwe jest przystąpienie do projektowania, trenowania i testowania sieci w celu stworzenia możliwie skutecznego modelu.
 %\chapter{Sygnał diagnostyczny - symulowanie, wstępne przetwarzanie} 
 \section{Symulowanie sygnału diagnostycznego}
+Symulowanie sygnału diagnostycznego realizowane jest poprzez funkcję napisaną w języku Python. Jest to prosty skrypt przyjmujący jako argumenty parametry sygnału, takie jak 
+\begin{itemize}
+	\item częstotliwości graniczne
+	\item odchylenie standardowe szumu
+	\item częstotliwość próbkowania
+	\item czas trwania sygnału
+	\item średnia amplituda impulsu.
+\end{itemize}
+Metoda polega na wygenerowaniu zaszumionego sygnału o charakterystyce zbliżonej do sygnałów diagnostycznych a następnie dodaniu do niego cyklicznych impulsów o średniej amplitudzie zadanej przez odpowiedni parametr. 
+Jako rezultat funkcja zwraca wektor danych o długości proporcjonalnej do częstotliwości próbkowania i czasu trwania sygnału.
+
+Dalsza praca oparta jest na wygenerowanym zbiorze danych który zawiera sygnały z pulsacjami o różnej sile. Dane o różnych wartościach stosunku sygnału do szumu (SNR,~ang.~\textit{signal-to-noise ratio}) umożliwią sieci nauczenie się różnych przypadków. W~tabeli~\ref{tab:dataset} przedstawiono szczegółowy ich wykaz. SNR najczęściej wyrażany jest jako stosunek mocy sygnału do mocy szumu \cite{johnson2006signal}. Na potrzeby pracy zostanie zdefiniowany następująco.
+\begin{equation}
+	SNR = \frac{\sigma_{imp}}{\sigma_{noise}}.
+\end{equation}
+\begin{table}[H]
+	\caption{Zawartość zbioru danych}
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\hline                       
+		SNR & Liczba sygnałów & {\'S}rednia amplituda impulsu \rule{0pt}{2.6ex}  \\  [0.5ex] 
+		\hline 
+		0.1 & 900 & 0.0  \\
+		0.1 & 100 & 0.1  \\
+		0.5 & 100 & 0.5  \\
+		1.5 & 100 & 1.0  \\
+		1.0 & 100 & 1.5  \\
+		0.1 & 100 & 2.0  \\
+		0.1 & 100 & 2.5  \\
+		0.1 & 100 & 3.0  \\
+		0.1 & 100 & 3.5  \\
+		0.1 & 100 & 4.0  \\ 
+		\hline 
+	\end{tabular}
+	\caption*{\textit{Źródło: opracowanie własne}}
+	\label{tab:dataset} 
+\end{table}
+Sygnały o zerowej wartości impulsów traktowane są jako pochodzące ze sprawnej maszyny. Sygnały z impulsami o wartości $0.1$ i większych są traktowane jako pochodzące z uszkodzonych maszyn. Rysunek \ref{pulsacje} prezentuje przykładowe sygnały z impulsami o różnej sile. Większa liczba sygnałów o zerowej wartości amplitudy impulsów ma na celu zbalansowanie zbioru danych.
+Dysponując tak przygotowanym zbiorem danych możliwe jest przystąpienie do pracy nad modelem. Pierwszym krokiem będzie wstępne przetwarzanie danych. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=16cm]{images/pulsacje.png}
+	\caption{Przykładowe sygnały dla różnych poziomów mocy impulsów}
+	\label{pulsacje}
+\end{figure}
 \section{Wstępne przetwarzanie danych}
 Przed przystąpieniem do uczenia sieci neuronowej niezbędne jest przygotowanie zestawu danych uczących. W dalszej pracy przetestowano dwa podejścia, jedno z użyciem surowego sygnału, drugie polegające na przygotowaniu statystyk opisujących sygnał. Zadanie polega na wykryciu pulsacji w sygnale diagnostycznym dlatego wybór statystyk opisujących sygnał musi odpowiadać postawionemu zadaniu. Dla opisania zmienności sygnału posłużą następujące estymatory:
 \begin{itemize}
