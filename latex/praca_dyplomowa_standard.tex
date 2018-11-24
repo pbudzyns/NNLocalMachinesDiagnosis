@@ -197,7 +197,7 @@ Prężny rozwój dziedziny zapoczątkowało wynalezienie sztucznego perceptronu 
 
 Wraz z upływem czasu pojawiają się kolejne modele neuronów i rodzaje sieci neuronowych. Dzisiaj problemy takie jak grupowanie danych, wykrywanie struktur, regresja nie stanowią dla sieci żadnego problemu. Potrafią one o wiele więcej. Wraz ze wzrostem mocy obliczeniowej komputerów oraz możliwości dokonywania na procesorach kart graficznych (GPU) możliwe stało się wielowarstwowych architektur a wielu węzłach, tak zwanych głębokich sieci neuronowych (ang. \textit{deep neural networks}). Te skomplikowane struktury potrafią o wiele więcej, a każdego dnia pojawia się więcej pomysłów na ich zastosowanie. 
 
-Głębokie architektury sieci konwolucyjnych bez problemu radzą sobie z przetwarzaniem obrazów. Wykrywanie obiektów w czasie rzeczywistym \cite{ren2015faster}, rozpoznawanie twarzy \cite{lin1997face} czy prowadzenie pojazdu \cite{bojarski2016end} przez komputer nie wydaje się być dzisiaj niczym zaskakującym. Sieci takie pomagają również wykrywać zmiany nowotworowe \cite{nnnature} na podstawie zdjęć lub opisywać fotografie \cite{xu2015show}.
+Głębokie architektury sieci konwolucyjnych bez problemu radzą sobie z przetwarzaniem obrazów. Wykrywanie obiektów w czasie rzeczywistym \cite{ren2015faster}, rozpoznawanie twarzy \cite{lin1997face} czy prowadzenie pojazdu \cite{bojarski2016end} przez komputer nie wydaje się być dzisiaj niczym zaskakującym. Sieci takie pomagają również wykrywać zmiany nowotworowe na podstawie zdjęć \cite{nnnature} lub opisywać fotografie \cite{xu2015show}.
 
 Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (ang. \textit{natural language processing}) zajmuje się opracowaniem metod pozwalającym rozumieć maszynom nasz język \cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim maszyny potrafią przewidywać zakończenie zdania \cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
 
@@ -278,14 +278,14 @@ Przed przystąpieniem do uczenia sieci neuronowej niezbędne jest przygotowanie 
 
 \section{Zastosowanie sieci neuronowych}
 
-Sieci neuronowe są strukturami realizującymi przetwarzanie danych poprzez rzędy elementów. Siecią użytą w pracy jest tak zwany perceptron wielowarstwowy. Jego bazowym elementem jest perceptron zaprezentowany poniżej. Składa się on z wejść wraz z wagami, funkcją sumującą oraz funkcją aktywacji. W przypadku użycia funkcji kroku perceptron pozwala na binarną klasyfikację liniowo separowalnych danych. 
+Sieci neuronowe są strukturami realizującymi przetwarzanie danych poprzez rzędy elementów. Siecią użytą w pracy jest tak zwany perceptron wielowarstwowy. Jego bazowym elementem jest tak zwany perceptron zaprezentowany na rysunku \ref{perceptron}. Składa się on z wejść wraz z wagami, funkcją sumującą oraz funkcją aktywacji. W przypadku użycia funkcji kroku perceptron pozwala na binarną klasyfikację liniowo separowalnych danych. 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=10cm]{images/perceptron_c.pdf}
-	\caption{Perceptron}
+	\caption{Model sztucznego neuronu -- perceptron}
 	\label{perceptron}
 \end{figure}
-W trakcie dalszych badań odkryto że połączenie wielu perceptronów pozwala na stworzenie struktury skutecznej nie tylko dla liniowo separowalnych danych. Tak powstał perceptron wielowarstwowy, popularna sieć neuronowa skuteczna w wielu zastosowaniach. Wyzwaniem jest wyznaczenie wag dla poszczególnych wejść. Najczęściej to zadanie jest realizowane poprzez algorytm wstecznej propagacji polegający na obliczaniu błędu na wyjściu z sieci a następnie przekazywaniu go wstecz tak aby poszczególne warstwy mogły zmodyfikować swoje wagi. 
+W trakcie dalszych badań odkryto że połączenie wielu perceptronów pozwala na stworzenie struktury skutecznej nie tylko dla liniowo separowalnych danych. Tak powstał perceptron wielowarstwowy, popularna sieć neuronowa skuteczna w wielu zastosowaniach. Schemat takiej sieci zaprezentowano na rysunku \ref{mlp}. Wyzwaniem jest wyznaczenie wag dla poszczególnych wejść. Najczęściej to zadanie jest realizowane poprzez algorytm wstecznej propagacji polegający na obliczaniu błędu na wyjściu z sieci a następnie przekazywaniu go wstecz tak aby poszczególne warstwy mogły zmodyfikować swoje wagi. 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=10cm]{images/siec_c.pdf}
@@ -293,61 +293,26 @@ W trakcie dalszych badań odkryto że połączenie wielu perceptronów pozwala n
 	\label{mlp}
 \end{figure}
 
-Testowanie skuteczności sieci odbywać się będzie przy pomocy techniki nazywanej walidacją krzyżową. Polega ona na podziale całości danych na części a następnie wybierane kolejno jednej z nich jako zbioru testowego, używając reszty danych do nauczenia sieci. Zbierając wyniki dla wykonanych prób możliwe jest określenie jakości rozwiązania. 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=10cm]{images/walidacja_c.pdf}
-	\caption{Walidacja krzyżowa}
-	\label{cross-validation}
-\end{figure}
+
 
 \section{Trening sieci neuronowej}
+
 tutaj schemat kompletnego działąnia z podsumowaniem tego co bylo wczesniej i opisem jak dziala
 Rysunek \ref{proces-caly} przedstawia schemat działania
+
+
+\section{Testowanie skuteczności modelu}
+Opracowanie optymalnego modelu wymaga istnienia sposobu na jego przetestowanie. Proces badania skuteczności modelu przedstawiono na rysunku \ref{proces-caly}. Proces opiera się na podziale zbioru danych na rozłączne zbiory uczący i testujący. Po wytrenowaniu sieci na zbiorze uczącym dokonujemy predykcji dla zbioru testowego przy pomocy wyuczonej sieci neuronowej. W kolejnym kroku następuje porównanie wyników do wartości rzeczywistej i wyliczenie statystyk dotyczących skuteczności modelu. 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=0.7]{images/total_proc.pdf}
-	\caption{Schemat przebiegu pracy systemu wykrywania uszkodzenia}
+	\includegraphics[scale=0.9]{images/system2.pdf}
+	\caption{Procedura testowania skuteczności zaprojektowanego modelu}
 	\label{proces-caly}
-\end{figure}
-
-
-\section{System klasyfikacji uszkodzeń}
-Finalnym zadaniem jest stworzenie całości systemu monitorującego który dokonywałby predykcji na postawie wprowadzonego sygnału. 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[scale=0.7]{images/workflow_c.pdf}
-	\caption{Schemat przebiegu pracy systemu wykrywania uszkodzenia}
-	\label{proces-koncowy}
-\end{figure}
-
-W dalszych rozdziałach opisany zostanie proces wykorzystania powyższych metod w celu opracowania optymalnego rozwiązania. Rozpoczynając od określenia metodyki projektowania i testowania sieci neuronowej poprzez trening i wybór najlepszego modelu. Ostatecznie zaprezentowane zostanie przykładowe zastosowanie opracowanego modelu w teoretycznym systemie monitorującym pracę maszyny górniczej. 
-
-
-
-% opis dzialania sieci neuronowej jak sadze
-
-
-
-
-
-
-
-%\chapter{Wyniki dla danych symulowanych}
-\chapter{Projektowanie sieci neuronowej}
-Skuteczność rozwiązania silnie zależy od użytej sieci. Projektowanie sieci polega na doborze tak zwanych hiperparametrów (\textit{ang. hyperparameters}). Zalicza się do nich między innymi:
-\begin{itemize}
-	\item Liczba warstw ukrytych
-	\item Liczba neuronów w warstwach
-	\item Algorytm nauczania oraz jego parametry
-	\item Funkcje aktywacji w neuronach.
-\end{itemize}
-
-Nie istnieje skuteczna metoda doboru parametrów, przy zastosowaniu złożonych sieci badacze najczęściej polegają na swoim doświadczeniu oraz intuicji. Na potrzeby tego zadania przeprowadzono szereg eksperymentów mających na celu określić najskuteczniejszą sieć do wykonania postawionego zadania. \\
+\end{figure} 
 
 Żeby tego dokonać należy ustalić sposób pomiaru skuteczności danej sieci, w tym celu posłużono się macierzą pomyłek przedstawioną w tabeli \ref{tab:pomylki} oraz zdefiniowanymi przy jej pomocy miarami.
 
-\begin{table}[ht]
+\begin{table}[H]
 	\caption{Macierz pomyłek}
 	\begin{tabular}{lccc}
 		& \multicolumn{1}{l}{}                    & \multicolumn{2}{c}{\textbf{klasa rzeczywista}}                                                                                                                                      \\ \cline{3-4} 
@@ -355,21 +320,21 @@ Nie istnieje skuteczna metoda doboru parametrów, przy zastosowaniu złożonych 
 		\multicolumn{1}{c|}{\multirow{2}{*}{\textbf{klasa predykowana}}} & \multicolumn{1}{c|}{\textbf{pozytywna}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}prawdziwie\\ pozytywna (TP)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}fałszywie\\ pozytywna (FP)\end{tabular}}  \\ \cline{2-4} 
 		\multicolumn{1}{c|}{}                                            & \multicolumn{1}{c|}{\textbf{negatywna}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}fałszywie\\ negatywna (FN)\end{tabular}}  & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}prawdziwie\\ negatywna (TN)\end{tabular}} \\ \cline{2-4} 
 	\end{tabular}
-\caption*{\textit{Źródło: opracowanie własne}}
-\label{tab:pomylki} 
+	\caption*{\textit{Źródło: opracowanie własne}}
+	\label{tab:pomylki} 
 \end{table}
 
 \begin{center}
 	\begin{enumerate}
-		\item Dokładność (\textit{ang. accuracy})
+		\item Dokładność (ang. \textit{accuracy})
 		\begin{equation}
 		acc = \frac{TP + TN}{P + N}
 		\end{equation}
-		\item Czułość (\textit{ang. recall}) - odsetek prawdziwie pozytywnych
+		\item Czułość (ang. \textit{recall}) - odsetek prawdziwie pozytywnych
 		\begin{equation}
 		recall = \frac{TP}{TP + FN}
 		\end{equation}
-		\item Precyzja (\textit{ang. precision})
+		\item Precyzja (ang. \textit{precision})
 		\begin{equation}
 		precision = \frac{TP}{TP + FP}
 		\end{equation}
@@ -381,7 +346,35 @@ Nie istnieje skuteczna metoda doboru parametrów, przy zastosowaniu złożonych 
 	
 \end{center}
 
-Badanie skuteczności sieci opiera się na metodyce walidacji krzyżowej czyli podziału zbioru danych na części a następnie użycie każdej z kolejno do testowania, reszta do uczenia <- to do metodyki
+Testowanie skuteczności sieci odbywać się będzie przy pomocy techniki nazywanej walidacją krzyżową. Polega ona na podziale całości danych na części a następnie wybierane kolejno jednej z nich jako zbioru testowego, używając reszty danych do nauczenia sieci. Zbierając wyniki dla wykonanych prób możliwe jest określenie jakości rozwiązania. Rysunek \ref{cross-validation} przedstawia schemat postępowania.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=10cm]{images/walidacja_c.pdf}
+	\caption{Walidacja krzyżowa}
+	\label{cross-validation}
+\end{figure}
+
+\section{System klasyfikacji uszkodzeń}
+Finalnym zadaniem jest stworzenie całości systemu monitorującego który dokonywałby predykcji na postawie wprowadzonego sygnału. Jego działanie odzwierciedla warunki rzeczywiste w których należy dokonać oceny stanu maszyny na podstawie otrzymanego sygnału diagnostycznego. System ten jest w stanie przetwarzać sygnał w czasie rzeczywistym, a po odpowiedniej konfiguracji i określeniu poziomów alarmowych jest w stanie poinformować o zagrożeniu lub konieczności konserwacji maszyny. Schemat przebiegu pracy systemu zaprezentowano na rysunku \ref{proces-koncowy}.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.7]{images/workflow_c.pdf}
+	\caption{Przebieg pracy systemu wykrywania uszkodzenia}
+	\label{proces-koncowy}
+\end{figure}
+
+W dalszych rozdziałach opisany zostanie proces wykorzystania powyższych metod w celu opracowania optymalnego rozwiązania. Rozpoczynając od określenia metodyki projektowania i testowania sieci neuronowej poprzez trening i wybór najlepszego modelu. Ostatecznie zaprezentowane zostanie przykładowe zastosowanie opracowanego modelu w teoretycznym systemie monitorującym pracę maszyny górniczej. 
+
+\chapter{Projektowanie sieci neuronowej}
+Skuteczność rozwiązania silnie zależy od użytej sieci. Projektowanie sieci polega na doborze tak zwanych hiperparametrów (ang. \textit{hyperparameters}). Zalicza się do nich między innymi:
+\begin{itemize}
+	\item Liczba warstw ukrytych
+	\item Liczba neuronów w warstwach
+	\item Algorytm nauczania oraz jego parametry
+	\item Funkcje aktywacji w neuronach.
+\end{itemize}
+
+Nie istnieje skuteczna metoda doboru parametrów, przy zastosowaniu złożonych sieci badacze najczęściej polegają na swoim doświadczeniu oraz intuicji. Na potrzeby tego zadania przeprowadzono szereg eksperymentów mających na celu określić najskuteczniejszą sieć do wykonania postawionego zadania. Każdy model przetestowano według metod przedstawionych w poprzednim rozdziale. 
 
 
 \section{Zależność od danych wejściowych}
@@ -404,7 +397,7 @@ Pierwszy eksperyment będzie postawą do decyzji o tym jakich danych należy uż
 	\subitem liczba wag: mało
 \end{enumerate}
 
-Wyniki eksperymentu prezentują sie następująco.
+Wyniki eksperymentu prezentują się następująco.
 
 
 \begin{figure}[ht]
