@@ -384,7 +384,8 @@ Finalnym zadaniem jest stworzenie całości systemu monitorującego który dokon
 W dalszych rozdziałach opisany zostanie proces wykorzystania powyższych metod w celu opracowania optymalnego rozwiązania. Rozpoczynając od określenia metodyki projektowania i testowania sieci neuronowej poprzez trening i wybór najlepszego modelu. Ostatecznie zaprezentowane zostanie przykładowe zastosowanie opracowanego modelu w teoretycznym systemie monitorującym pracę maszyny górniczej. 
 
 \chapter{Projektowanie sieci neuronowej}
-Skuteczność rozwiązania silnie zależy od użytej sieci. Projektowanie sieci polega na doborze tak zwanych hiperparametrów (ang. \textit{hyperparameters}). Zalicza się do nich między innymi:
+Rozwiązanie postawionego problemu polega de facto na zaprojektowaniu skutecznego modelu. W pracy użyta została sieć neuronowa typu perceptron wielowarstwowy. Przy projektowaniu takiej sieci należy ustalić szereg parametrów zależnych głównie od danych, na których sieć ma być uczona. W poniższych rozważaniach zaprezentowano dwa podejścia, pierwsze z nich polega na próbie nauczania sieci surowym sygnałem diagnostycznym, drugie na nauczaniu sieci estymatorami wyliczonymi dla sygnału. 
+Parametry opisujące sieć to tak zwane hiperparametry modelu (ang. \textit{hyperparameters}). Zalicza się do nich między innymi:
 \begin{itemize}
 	\item Liczba warstw ukrytych
 	\item Liczba neuronów w warstwach
@@ -392,10 +393,10 @@ Skuteczność rozwiązania silnie zależy od użytej sieci. Projektowanie sieci 
 	\item Funkcje aktywacji w neuronach.
 \end{itemize}
 
-Nie istnieje skuteczna metoda doboru parametrów, przy zastosowaniu złożonych sieci badacze najczęściej polegają na swoim doświadczeniu oraz intuicji. Na potrzeby tego zadania przeprowadzono szereg eksperymentów mających na celu określić najskuteczniejszą sieć do wykonania postawionego zadania. Każdy model przetestowano według metod przedstawionych w poprzednim rozdziale. 
+Nie istnieje skuteczna metoda doboru parametrów, przy zastosowaniu złożonych sieci badacze najczęściej polegają na swoim doświadczeniu oraz intuicji. Na potrzeby tego zadania przeprowadzono szereg eksperymentów mających na celu określić najskuteczniejszą architekturę do wykonania postawionego zadania. Każdy z modeli przetestowano według metod przedstawionych w poprzednim rozdziale. 
 
 \section{Zależność od danych wejściowych}
-Pierwszy eksperyment będzie postawą do decyzji o tym jakich danych należy użyć do uczenia sieci. Należy porównać jak uczy się sieć w zależności od danych wejściowych. Porównane zostaną dwa podejścia: użycie surowego sygnału oraz wstępnie przetworzonego. 
+Pierwszy eksperyment będzie postawą do decyzji o tym jakich danych należy użyć do uczenia sieci. Porównane zostaną dwa podejścia: użycie surowego sygnału oraz wstępnie przetworzonego. Ostateczna decyzja podjęta zostanie na podstawie statystyk skuteczności modelu uzyskanych według procesu zaprezentowanego na rysunku \ref{proces-caly} w poprzednim rozdziale. Przeprowadzono trzy eksperymenty których parametry zaprezentowano poniżej.
 
 \begin{enumerate}
 	\item Surowy sygnał podeście pierwsze
@@ -414,31 +415,31 @@ Pierwszy eksperyment będzie postawą do decyzji o tym jakich danych należy uż
 	\subitem liczba wag: mało
 \end{enumerate}
 
-Wyniki eksperymentu prezentują się następująco.
+Po przeprowadzeniu implementacji, uczenia i testowania sieci otrzymano szczegółowe statystyki dla każdego z nich. Wyniki pozwalają na wnioskowanie o skuteczności rozwiązania oraz możliwości dalszej pracy z wybraną architekturą lub jej wariantami. Wyniki dla pierwszego eksperymentu przedstawione na rysunku \ref{wynik-sur-1000-500-200} pokazują bardzo dziwne zachowanie oraz niską skuteczność. Można śmiało założyć że sieć nie uczy się prawidłowo a predykcje nie są prawidłowe. Kolejny eksperyment którego wyniki widać na rysunku \ref{wynik-sur-500-200} prezentują się nieco lepiej lecz również są w pewnym stopniu chaotyczne. Da się jednak zauważyć płynny wzrost skuteczności dla sygnałów z coraz większymi impulsami. Ostatecznie eksperyment trzeci daje najbardziej obiecujące wyniki, zaprezentowane na rysunku \ref{wynik-est-5-3-2}. Prawidłowość predykcji wzrasta bardzo płynnie a od pewnego poziomu mocy impulsu wynosi ponad $80\%$.
 
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=14cm]{images/nn_full_1000_500_200.pdf}
-	\caption{Wyniki surowego sygnału, architektura -1000-500-200-}
+	\caption{ Eksperyment 1. Wyniki surowego sygnału, architektura -1000-500-200-}
 	\label{wynik-sur-1000-500-200}
 \end{figure}
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=14cm]{images/nn_full_signal_500_200.pdf}
-	\caption{Wyniki dla surowego sygnału, architektura -500-200-}
+	\caption{Eksperyment 2. Wyniki dla surowego sygnału, architektura -500-200-}
 	\label{wynik-sur-500-200}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=14cm]{images/nn_small_532.pdf}
-	\caption{Wyniki dla estymatorów, architektura -5-3-2-}
+	\caption{ Eksperyment 3. Wyniki dla estymatorów, architektura -5-3-2-}
 	\label{wynik-est-5-3-2}
 \end{figure}
 
-Zastosowanie surowego sygnału, niezależnie od architektury, daje bardzo chaotyczne wyniki sugerujące że proces nauczania nie przebiega prawidłowo a predykcja jest obarczona dużym błędem. Podejście z zastosowaniem surowego sygnału jest kosztowne obliczeniowo i mało efektywne dlatego należy je wykluczyć z dalszych rozważań. Z kolei zastosowanie estymatorów opisujących sygnał daje obiecujące wyniki pozwalające wnioskować o skutecznym uczeniu się sieci. W oparciu o zaproponowaną architekturę zostanie przeprowadzony kolejny eksperyment mający stwierdzić czy przy użyciu obecnych danych uczących można otrzymać lepsze wyniki.
+Z przeprowadzonych eksperymentów wyciągnięto następujące wnioski. Zastosowanie surowego sygnału, niezależnie od architektury, daje bardzo chaotyczne wyniki sugerujące że proces nauczania nie przebiega prawidłowo a predykcja jest obarczona dużym błędem. Podejście z zastosowaniem surowego sygnału jest kosztowne obliczeniowo i mało efektywne dlatego należy je wykluczyć z dalszych rozważań. Z drugiej strony zastosowanie estymatorów opisujących sygnał daje obiecujące wyniki pozwalające wnioskować o skutecznym uczeniu się sieci. W oparciu o zaproponowaną architekturę zostanie przeprowadzony kolejny eksperyment mający stwierdzić czy przy użyciu obecnych danych uczących można otrzymać lepsze wyniki.
 
 \section{Zależność od architektury}
 Po decyzji o użyciu estymatorów jako danych uczących należy przeprowadzić eksperyment mający na celu określenie najlepszej architektury sieci neuronowej. Ponieważ architektura zaproponowana w poprzednim eksperymencie dawała wyniki świadczące o poprawnie przebiegającym procesie uczenia zaproponowano różne jej wariancje. 
