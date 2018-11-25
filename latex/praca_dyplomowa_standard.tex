@@ -323,7 +323,7 @@ W pracy wykorzystano implementację perceptronu wielowarstwowego wraz z algorytm
 Opracowanie optymalnego modelu wymaga istnienia sposobu na jego przetestowanie. Proces badania skuteczności modelu przedstawiono na rysunku \ref{proces-caly}. Proces opiera się na podziale zbioru danych na rozłączne zbiory uczący i testujący. Po wytrenowaniu sieci na zbiorze uczącym dokonujemy predykcji dla zbioru testowego przy pomocy wyuczonej sieci neuronowej. W kolejnym kroku następuje porównanie wyników do wartości rzeczywistej i wyliczenie statystyk dotyczących skuteczności modelu. 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=0.9]{images/system2.pdf}
+	\includegraphics[scale=0.9]{images/system2_c.pdf}
 	\caption{Procedura testowania skuteczności zaprojektowanego modelu}
 	\label{proces-caly}
 \end{figure} 
@@ -374,7 +374,7 @@ Testowanie skuteczności sieci odbywać się będzie przy pomocy techniki nazywa
 
 \section{System klasyfikacji uszkodzeń}
 Finalnym zadaniem jest stworzenie całości systemu monitorującego który dokonywałby predykcji na postawie wprowadzonego sygnału. Jego działanie odzwierciedla warunki rzeczywiste w których należy dokonać oceny stanu maszyny na podstawie otrzymanego sygnału diagnostycznego. System ten jest w stanie przetwarzać sygnał w czasie rzeczywistym, a po odpowiedniej konfiguracji i określeniu poziomów alarmowych jest w stanie poinformować o zagrożeniu lub konieczności konserwacji maszyny. Schemat przebiegu pracy systemu zaprezentowano na rysunku \ref{proces-koncowy}.
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{images/workflow_c.pdf}
 	\caption{Przebieg pracy systemu wykrywania uszkodzenia}
@@ -442,7 +442,10 @@ Po przeprowadzeniu implementacji, uczenia i testowania sieci otrzymano szczegó�
 Z przeprowadzonych eksperymentów wyciągnięto następujące wnioski. Zastosowanie surowego sygnału, niezależnie od architektury, daje bardzo chaotyczne wyniki sugerujące że proces nauczania nie przebiega prawidłowo a predykcja jest obarczona dużym błędem. Podejście z zastosowaniem surowego sygnału jest kosztowne obliczeniowo i mało efektywne dlatego należy je wykluczyć z dalszych rozważań. Z drugiej strony zastosowanie estymatorów opisujących sygnał daje obiecujące wyniki pozwalające wnioskować o skutecznym uczeniu się sieci. W oparciu o zaproponowaną architekturę zostanie przeprowadzony kolejny eksperyment mający stwierdzić czy przy użyciu obecnych danych uczących można otrzymać lepsze wyniki.
 
 \section{Zależność od architektury}
-Po decyzji o użyciu estymatorów jako danych uczących należy przeprowadzić eksperyment mający na celu określenie najlepszej architektury sieci neuronowej. Ponieważ architektura zaproponowana w poprzednim eksperymencie dawała wyniki świadczące o poprawnie przebiegającym procesie uczenia zaproponowano różne jej wariancje. 
+Na podstawie eksperymentów przeprowadzonych w poprzedniej części wywnioskowano o największej skuteczności sieci neuronowej nauczanej na estymatorach opisujących sygnały diagnostyczne. W kolejnym kroku należy przeprowadzić eksperyment wyznaczający najlepszą z architektur. Ponieważ architektura zaproponowana w poprzednim eksperymencie dawała wyniki świadczące o poprawnie przebiegającym procesie uczenia zaproponowano różne jej wariancje. Przeprowadzono szereg prób z różnymi liczbami warstw ukrytych oraz węzłów w sieci. Skuteczność architektur zaprezentowana na rysunkach \ref{wynik2-est-5-3-2}, \ref{wynik-est-8-5}, \ref{wynik-est-2}, \ref{wynik-est-5} jest bardzo zbliżona, modele osiągają podobne wyniki w zależności od współczynnika SNR.
+
+ Ostatecznie do użycia został wybrany model z jedną warstwą ukrytą o pięciu neuronach. Wyniki dla tego modelu widoczne są na rysunku \ref{wynik-est-5}. Ze względu na niewielki rozmiar sieci można dokonać wizualizacji wyżej wymienionej sieci. Schemat przedstawiono na rysunku \ref{final_model}. 
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=14cm]{images/nn_small_532.pdf}
@@ -468,8 +471,14 @@ Po decyzji o użyciu estymatorów jako danych uczących należy przeprowadzić e
 	\label{wynik-est-5}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1.5]{images/final_model_c.pdf}
+	\caption{Schemat sieci neuronowej o architekturze -5-}
+	\label{final_model}
+\end{figure}
 
-
+Do tego momentu opracowano kompletny model sieci neuronowej dokonującej skutecznych predykcji na temat stanu technicznego diagnozowanej maszyny. Na drodze eksperymentów przetestowano możliwe podejścia i wytypowano najskuteczniejsze z nich. W kolejnym rozdziale zaprezentowano przykładowe zastosowanie opracowanego modelu w systemie. Wybrany model zostanie użyty do zbudowania systemu monitorującego stan maszyny na podstawie dostarczonego sygnału diagnostycznego. 
 
 %Nauczanie sieci 
 %Z powodu zapotrzebowania na dużą ilosć danych w procesie uczenia sieci neuronowych dalsza praca opiera się na danych symulowanych. Program generujący sygnał pozwala na dobór szeregu parametrów takich jak częstotliwości, amplitudy, zaszumienie oraz siłę pulsacji.
