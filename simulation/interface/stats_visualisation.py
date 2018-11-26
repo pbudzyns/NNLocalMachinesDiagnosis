@@ -65,7 +65,7 @@ def plot_all(filenames):
 
 def save_as_pdf(filename):
     figure = get_figure(filename, type='pdf')
-    pio.write_image(figure, filename.replace("inputs", "../../latex/images").replace(".csv", ".pdf"))
+    pio.write_image(figure, filename.replace("inputs", "../../latex/images2").replace(".csv", ".pdf"))
 
 
 
