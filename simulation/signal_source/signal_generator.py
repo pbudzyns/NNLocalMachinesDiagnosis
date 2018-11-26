@@ -4,7 +4,7 @@ import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
-def signal_generator(fs=2**13, T=1, mu_imp1=0, f1_low=1500, f1_high=2500, s_noise=0.1, s_add=0.7):
+def signal_generator(fs=2**13, T=1.0, mu_imp1=0, f1_low=1500, f1_high=2500, s_noise=0.1, s_add=0.7):
     ff1 = 5
     nx = int(fs * T)
     # print(nx)
@@ -40,9 +40,7 @@ def signal_generator(fs=2**13, T=1, mu_imp1=0, f1_low=1500, f1_high=2500, s_nois
 
 
 if __name__ == '__main__':
-    y, t = signal_generator(fs=2 ** 13, T=1, mu_imp1=7,
+    y, t = signal_generator(fs=2 ** 13, T=0.5, mu_imp1=7,
                             f1_low=1500, f1_high=2500,
                             s_noise=0.1, s_add=0.7)
-    import matplotlib.pyplot as plt
-    plt.plot(t, y)
-    plt.show()
+

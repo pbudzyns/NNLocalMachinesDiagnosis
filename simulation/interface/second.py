@@ -48,13 +48,13 @@ def generate_table(dataframe, max_rows=10):
 
     )
 
-result_table = pd.DataFrame(columns = ['ID', 'Pulsation', 'Duration', 'Damage Probability', 'Classification'])
+result_table = pd.DataFrame(columns = ['ID', 'Pulsacja', 'Czas trwania', 'Prawdopodobieństwo uszkodzenia', 'Klasyfikacja'])
 # result_table.loc[0] = [0,0,0,0]
 app.layout = html.Div([
     html.Div(
         className="row",
         children=[
-            html.H1('Damage Detection Simulator'),
+            html.H1('System Monitorujący'),
             html.Div(
                 className="six columns",
                 children=[
@@ -68,9 +68,9 @@ app.layout = html.Div([
             html.Div(
                 className="six columns",
                 children=html.Div([
-                    html.H6('Pulsation'),
+                    html.H6('Pulsacje'),
                     dcc.Input(id='pulsation-source', placeholder='Enter a value ...', value='2.5', type='text'),
-                    html.H6('Duration'),
+                    html.H6('Długość sygnału'),
                     dcc.Input(id='duration-source', placeholder='Enter a value ...', value='0.5', type='text'),
                     html.Br(),
                     html.Button('Generate', id='refresh-button'),
@@ -89,7 +89,7 @@ app.layout = html.Div([
 ])
 
 monitor = Monitor()
-monitor.load_model("../analytics/models/mlp_classifier_one_big.model")
+monitor.load_model("../analytics/models/mlp_classifier_one_big_5.model")
 signal_source = SignalSource()
 h_proba = deque(maxlen=20)
 d_proba = deque(maxlen=20)
@@ -114,9 +114,9 @@ def plot_signal(n_clicks, n_submit, n_submit2, pulsation, duration):
     # print('Signal prepared')
     # print('signal: \n', signal, '\n T: \n', t)
     signal, t = signal_source.get_single_signal(pulsation=pulsation, duration=duration)
-    data = go.Scatter(x=list(t), y=list(signal), name='Signal', mode='lines')
-    layout = go.Layout(xaxis=dict(range=(min(t), max(t)), title='Time'), yaxis=dict(range=(-5, 5), title='Amplitude'),
-                        title='Signal')
+    data = go.Scatter(x=list(t), y=list(signal), name='Sygnał', mode='lines')
+    layout = go.Layout(xaxis=dict(range=(min(t), max(t)), title='Time'), yaxis=dict(range=(-5, 5), title='Amplituda'),
+                        title='Sygnał diagnostyczny')
 
     return {'data': [data], 'layout': layout}
 
@@ -128,7 +128,7 @@ def update_table(n_clicks, n_submit, n_submit2, pulsation, duration):
     global signal, result_table
     time.sleep(0.1)
     h_proba, d_proba = monitor.get_damage_proba(signal)
-    status = 'Damaged' if d_proba > h_proba else 'Health'
+    status = 'Uszkodzony' if d_proba > h_proba else 'Sprawny'
     result_table.loc[-1] = [0, pulsation, duration, '%.3f'%(d_proba), status]  # adding a row
     result_table.index = result_table.index + 1
     result_table['ID'] += 1

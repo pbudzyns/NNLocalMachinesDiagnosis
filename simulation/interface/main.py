@@ -20,7 +20,7 @@ app.layout = html.Div([dcc.Graph(id='live-graph', animate=True),
                        ])
 
 monitor = Monitor()
-monitor.load_model("../analytics/models/mlp_classifier_one_big.model")
+monitor.load_model("../analytics/models/mlp_classifier_one_big_5.model")
 h_proba = deque(maxlen=20)
 d_proba = deque(maxlen=20)
 n = deque(maxlen=20)
@@ -33,7 +33,7 @@ t = [0, ]
               inputs=[Input('imp_slider', 'value')])
 def update_output(value):
     signal_source.set_pulsation(float(value))
-    return f"Current pulsation: {value}"
+    return f"Aktualna amplituda impulsow: {value}"
 
 
 @app.callback(Output('live-prediction-graph', 'figure'),
@@ -45,8 +45,8 @@ def update_prediction_graph():
     d_proba.append(p2)
     n.append(n[-1] + 1)
 
-    h_data = go.Scatter(x=list(n), y=list(h_proba), name='H_Scatter', mode='lines+markers')
-    d_data = go.Scatter(x=list(n), y=list(d_proba), name='D_Scatter', mode='lines+markers')
+    h_data = go.Scatter(x=list(n), y=list(h_proba), name='p. Sprawny', mode='lines+markers')
+    d_data = go.Scatter(x=list(n), y=list(d_proba), name='p. Uszkodzony', mode='lines+markers')
 
     return {'data': [h_data, d_data], 'layout': go.Layout(xaxis=dict(range=[min(n), max(n)]),
                                                           yaxis=dict(range=[0, 1]))}
@@ -57,7 +57,7 @@ def update_prediction_graph():
 def update_graph():
     global signal, t
 
-    signal, t = signal_source.get_signal(0.75)
+    signal, t = signal_source.get_signal(0.5)
 
     data = go.Scatter(x=t, y=signal, name='Scatter',
                       mode='lines')

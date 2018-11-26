@@ -24,7 +24,7 @@ def train_and_save_model(model, data_handler, path):
 if __name__ == '__main__':
     # handler = prepare_signal_handler(".\inputs\symulacje_400_50_srednie")
     handler = SignalsHandler(preprocessing=get_preprocessing())
-    handler.load_pulsation(r".\inputs\snr_100_100\one_big.csv")
+    handler.load_pulsation(r".\inputs\snr_100_100\pulsation_1.5_100_-6.274.csv")
     handler.load_no_pulsation(r".\inputs\snr_100_100\nopulsation_100.csv")
     handler.initialize_data_sets()
 
@@ -37,5 +37,5 @@ if __name__ == '__main__':
 
 
 
-    train_and_save_model(clf, handler, "..\models\mlp_classifier_one_big.model")
+    train_and_save_model(clf, handler, "..\models\mlp_classifier_one_big_5.model")
     print(f"Done. Model successfully saved.\n Mean accuracy: {clf.score(handler.testing_data, handler.testing_labels)}")

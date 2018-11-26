@@ -197,7 +197,7 @@ Prężny rozwój dziedziny zapoczątkowało wynalezienie sztucznego perceptronu 
 
 Wraz z upływem czasu pojawiają się kolejne modele neuronów i rodzaje sieci neuronowych. Dzisiaj problemy takie jak grupowanie danych, wykrywanie struktur, regresja nie stanowią dla sieci żadnego problemu. Potrafią one o wiele więcej. Wraz ze wzrostem mocy obliczeniowej komputerów oraz możliwości dokonywania na procesorach kart graficznych (GPU) możliwe stało się wielowarstwowych architektur a wielu węzłach, tak zwanych głębokich sieci neuronowych (ang. \textit{deep neural networks}). Te skomplikowane struktury potrafią o wiele więcej, a każdego dnia pojawia się więcej pomysłów na ich zastosowanie. 
 
-Głębokie architektury sieci konwolucyjnych bez problemu radzą sobie z przetwarzaniem obrazów. Wykrywanie obiektów w czasie rzeczywistym\cite{ren2015faster}, rozpoznawanie twarzy\cite{lin1997face} czy prowadzenie pojazdu\cite{bojarski2016end} przez komputer nie wydaje się być dzisiaj niczym zaskakującym. Sieci takie pomagają również wykrywać zmiany nowotworowe na podstawie zdjęć\cite{nnnature} lub opisywać fotografie\cite{xu2015show}.
+Głębokie architektury sieci konwolucyjnych (ang. \textit{convolutional neural networks}) bez problemu radzą sobie z przetwarzaniem obrazów. Wykrywanie obiektów w czasie rzeczywistym\cite{ren2015faster}, rozpoznawanie twarzy\cite{lin1997face} czy prowadzenie pojazdu\cite{bojarski2016end} przez komputer nie wydaje się być dzisiaj niczym zaskakującym. Sieci takie pomagają również wykrywać zmiany nowotworowe na podstawie zdjęć\cite{nnnature} lub opisywać fotografie\cite{xu2015show}.
 
 Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (ang. \textit{natural language processing}) zajmuje się opracowaniem metod pozwalającym rozumieć maszynom nasz język\cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim maszyny potrafią przewidywać zakończenie zdania\cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
 
@@ -262,15 +262,15 @@ Przed przystąpieniem do uczenia sieci neuronowej niezbędne jest przygotowanie 
 	\item Wartość minimalna
 	\item Wariancja
 	\begin{equation}
-	Var (X) = \frac{1}{n-1} \sum_{i=0}^{n} \left(x_{i} - \mu\right)^{2}
+	Var (X) = \frac{1}{n-1} \sum_{i=0}^{n} \left(x_{i} - \bar{x}\right)^{2}
 	\end{equation}
 	\item Kurtoza
 	\begin{equation}
-	Kurt (X) = \frac{\frac{1}{n} \sum_{i=0}^{n}\left(x_{i} - \mu\right)^{4}}{\sigma^{4}} - 3
+	Kurt (X) = \frac{\frac{1}{n} \sum_{i=0}^{n}\left(x_{i} - \bar{x}\right)^{4}}{s^{4}} - 3
 	\end{equation}
 	\item Skośność
 	\begin{equation}
-	Skew (X) = 3 \frac{\mu - m}{\sigma}
+	Skew (X) = 3 \cdot \frac{\bar{x} - m}{s}
 	\end{equation}
 \end{itemize}
 
@@ -497,6 +497,39 @@ Do tego momentu opracowano kompletny model sieci neuronowej dokonującej skutecz
 
 %\section{System monitorujący - przykładowe zastosowanie modelu}
 \chapter{System monitorujący - przykładowe zastosowanie modelu}
+Opracowany model został użyty do stworzenia prostego systemu monitorującego. Na podstawie dostarczonego sygnału diagnostycznego system dostarcza informacji o predykowanym stanie maszyny. Schemat działania systemu zaprezentowano na rysunku \ref{monitor}. Otrzymany sygnał diagnostyczny zostaje przetworzony i dostarczony do modelu który zwraca wynik predykcji.
+ 
+Implementację rozwiązana stworzono w języku Python z użyciem bibliotek \textit{Scikit-learn} do obsługi modelu sieci neuronowej oraz \textit{Dash} do stworzenia panelu wizualizacji. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1.2]{images/monitor_c.pdf}
+	\caption{Schemat działania systemu monitorującego}
+	\label{monitor}
+\end{figure}
+
+W pierwszym wariancie możliwe jest wygenerowanie sygnału diagnostycznego oraz uzyskanie na jego temat odpowiedzi od sieci. Interfejs programu przedstawiono na rysunku \ref{monitor_static}. W polach po prawej stronie należy wprowadzić parametry sygnału: średnią amplitudę pulsacji oraz czas trwania sygnału. Po naciśnięciu przycisku \textit{Generuj} sygnał zostaje wygenerowany a następnie przekazany do modelu który wykonuje wstępne przetwarzanie danych i predykcję z użyciem sieci neuronowej. Wyniki przedstawiane są w aktualizowanej tabeli znajdującej się pod wykresem.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{images/monitor_static2.png}
+	\caption{Program pozwalający generujący sygnał o zadanych parametrach i zwracający predykcję na temat stanu maszyny.}
+	\label{monitor_static}
+\end{figure}
+
+W drugim wariancie zrealizowano program generujący sygnał nieprzerwanie. Jego interfejs pokazano na rysunkach \ref{monitor_live_1} i \ref{monitor_live_2}. Program umożliwia ustawienie średniej wartości impulsów w aktualnie generowanym programie przy pomocy suwaka znajdującego się pomiędzy wykresami. Górny wykres jest bieżącą wizualizacją sygnału diagnostycznego. Dolny wykres zawiera informacje na temat aktualnej prognozy stanu sprawności maszyny, prawdopodobieństwo sprawności i uszkodzenia.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.4]{images/monitor_live_1.png}
+	\caption{Program monitorujący stan maszyny. Reakcja na dużą wartość pulsacji.}
+	\label{monitor_live_1}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.4]{images/monitor_live_2.png}
+	\caption{Program monitorujący stan maszyny. Reakcja na niewielką wartość pulsacji.}
+	\label{monitor_live_2}
+\end{figure}
+
 %\chapter{Wnioski}
 {\backmatter \chapter{Wnioski}}
 \newpage

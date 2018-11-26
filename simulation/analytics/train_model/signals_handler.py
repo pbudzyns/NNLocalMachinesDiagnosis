@@ -23,6 +23,7 @@ class SignalsHandler:
 
     def load_no_pulsation(self, filename):
         self.no_pulsation = np.genfromtxt(filename, delimiter=",")
+        print(self.no_pulsation.shape)
 
     def load_pulsation(self, filename):
         self.pulsation = np.genfromtxt(filename, delimiter=",")
