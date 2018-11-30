@@ -98,7 +98,7 @@
 % Krótkie streszczenia po polsku i angielsku
 % - nie dłuższe niż 530 znaków.
 \streszczenie{Celem pracy jest zastosowanie sieci neuronowych do analizy sygnałów drganiowych w celu wykrywania uszkodzeń lokalnych w maszynach górniczych. Zakres pracy obejmuje opracowanie nowych metod i ich zastosowanie.}
-\streszczenieang{Thesis work base on neural network usage in the problem of diagnostic signals analysis in the problem of local damage detection in mining machines. The scope contains developing new methods and their usage. }
+\streszczenieang{The main goal of this thesis is the usage of the neural network for local damage detection in mining machines. We have developed new methodology and applied it to the simulated signals. }
 %
 % Podajemy najważniejsze słowa kluczowe po polsku i angielsku
 % - w obu przypadkach, nie więcej niż 150 znaków.
@@ -161,7 +161,7 @@ Uszkodzenia lokalne są uszkodzeniami występującymi w łożyskach i przekładn
 \centering
                      
 \includegraphics[scale=0.5]{images/sensors.png}
-\caption{Schemat badanej maszyny ze wskazaniem miejsca lokalizacji sensorów diagnostycznych}
+\caption{Schemat badanej maszyny ze wskazaniem miejsca lokalizacji sensorów diagnostycznych. Źródło: \cite{wylomanska}}.
 \label{sensory}
 \end{figure}
 Jednak w zależności od stopnia uszkodzenia pulsacje mogą mieć różne amplitudy, w przypadku wczesnego stadium rozwoju uszkodzenia najczęściej nie wystają one ponad poziom szumu. Przykłady sygnałów diagnostycznych przedstawione zostały na ilustracji~\ref{sygnal}.
@@ -175,15 +175,15 @@ Można zatem stwierdzić że detekcja uszkodzenia, z punktu widzenia matematyki,
 
 
 %wykrywanie uszkodzeń lokalnych jest jednym z \cite{Zimroz01}
-%Uszkodzenia lokalne powstające w przekładniach kół czerpakowych maszyn górniczych, są to na %przykład ubytki, pęknięcia, wykruszone zęby.  Najskutecznejszą obecnie metodą pozyskania sygnału %jest diagnostyka wibroakustyczna, okazuje się że uszkodzenia takie objawiają się cyklicznymi %pulsacjami w sygnale. Amplituda pulsacji zależy od stopnia uszkodzenia. Z punktu widzenia %matematyki detekcja takiego uszkodzenia polega na wykryciu, zazwyczaj niewidocznych na pierwszy %rzut oka, pulsacji w sygnale diagnostycznym. 
+%Uszkodzenia lokalne powstające w przekładniach kół czerpakowych maszyn górniczych, są to na %przykład ubytki, pęknięcia, wykruszone zęby.  Najskutecznejszą obecnie metodą pozyskania sygnału %jest diagnostyka wibroakustyczna, osygnału, również używając kurtozy do wyznaczenia pasma częstotliwości. Podejście to nazwane kurtogramemkazuje się że uszkodzenia takie objawiają się cyklicznymi %pulsacjami w sygnale. Amplituda pulsacji zależy od stopnia uszkodzenia. Z punktu widzenia %matematyki detekcja takiego uszkodzenia polega na wykryciu, zazwyczaj niewidocznych na pierwszy %rzut oka, pulsacji w sygnale diagnostycznym. 
 
-\section{State of the art}
+\section{Przegląd literatury}
 Analiza sygnałów diagnostycznych pochodzących z urządzeń mechanicznych jest szeroko badanym zagadnieniem inżynierskim. W tym celu wykorzystuje się szereg technik a dzięki postępującym pracom zakres dostępnych narzędzi stale się powiększa. Wiedząc, że uszkodzenie objawia się modulacjami częstotliwościowymi i amplitudowymi. Rzeczą oczywistą staje się wykorzystanie narzędzi znanych z analizy sygnałów.
 Interesującą techniką jest zautomatyzowane wyznaczanie pasma informacyjnego, zawierającego informacje o uszkodzeniu, z zastosowaniem filtrowania falkowego\cite{linandzuo}. 
 
-Podejście zaproponowane przez Antoni\cite{antoni} polega na obliczeniu kurtozy dla poszczególnych częstotliwości wziętych ze spektrogramu. Pozwala to na użycie ich w dalszej kolejności do wyznaczenia momentów wysokiej zmienności i ich lokalizacji w dziedzinie częstotliwości. Rozwinięciem tego podejścia jest wykorzystanie diadycznej(??) dekompozycji sygnału, również używając kurtozy do wyznaczenia pasma częstotliwości. Podejście to nazwane kurtogramem również zostało rozszerzone przez kolejnych naukowców.???\cite{antoni2}
+Podejście zaproponowane przez Antoni\cite{antoni} polega na obliczeniu kurtozy dla poszczególnych częstotliwości wziętych ze spektrogramu. Pozwala to na użycie ich w dalszej kolejności do wyznaczenia momentów wysokiej zmienności i ich lokalizacji w dziedzinie częstotliwości. Rozwinięciem tego podejścia jest wykorzystanie dekompozycji  również zostało rozszerzone przez kolejnych naukowców.\cite{antoni2}
 
-Urban\cite{urban} wykorzystuje rozkład intensywności modulacji do wyznaczania pasma informacyjnego. Podejście bazuje na założeniu istnienia nieliniowych zjawisk (???) (non-linear phenomena) powodowanych przez uszkodzenia lokalne. Dają się one modelować przez modulację amplitudową. 
+Urban\cite{urban} wykorzystuje rozkład intensywności modulacji do wyznaczania pasma informacyjnego. Podejście bazuje na założeniu istnienia nieliniowych zjawisk powodowanych przez uszkodzenia lokalne. Dają się one modelować przez modulację amplitudową. 
 
 Lub też użycie testu Andersona-Derlinga do obliczenia odległości od rozkładu normalnego, okazuje się że sygnał pochodzący z uszkodzonej maszyny jest daleki od takiego rozkładu\cite{wylomanska}.
 %prztumaczyc dokument ze strony wylomanskiej 
@@ -195,11 +195,11 @@ Sieci neuronowe można zdefiniować jako struktury matematyczne realizujące obl
 Obecnie sieci neuronowe są jedną z prężnie rozwijających się technologii nauczania maszynowego i szeroko wykorzystywane w pracach nad sztuczną inteligencją.
 Prężny rozwój dziedziny zapoczątkowało wynalezienie sztucznego perceptronu w 1957r. Był to model sztucznego neuronu pozwalającego na binarną klasyfikację liniowo separowalnych danych.
 
-Wraz z upływem czasu pojawiają się kolejne modele neuronów i rodzaje sieci neuronowych. Dzisiaj problemy takie jak grupowanie danych, wykrywanie struktur, regresja nie stanowią dla sieci żadnego problemu. Potrafią one o wiele więcej. Wraz ze wzrostem mocy obliczeniowej komputerów oraz możliwości dokonywania na procesorach kart graficznych (GPU) możliwe stało się wielowarstwowych architektur a wielu węzłach, tak zwanych głębokich sieci neuronowych (ang. \textit{deep neural networks}). Te skomplikowane struktury potrafią o wiele więcej, a każdego dnia pojawia się więcej pomysłów na ich zastosowanie. 
+Wraz z upływem czasu pojawiają się kolejne modele neuronów i rodzaje sieci neuronowych. Dzisiaj problemy takie jak grupowanie danych, wykrywanie struktur, regresja nie stanowią dla sieci żadnego problemu. Potrafią one o wiele więcej. Wraz ze wzrostem mocy obliczeniowej komputerów oraz możliwości dokonywania na procesorach kart graficznych (GPU) możliwe stało się tworzenie wielowarstwowych architektur o wielu węzłach, tak zwanych głębokich sieci neuronowych (ang. \textit{deep neural networks}). Te skomplikowane struktury posiadają o wiele większe możliwości, a każdego dnia pojawia się więcej pomysłów na ich zastosowanie. 
 
 Głębokie architektury sieci konwolucyjnych (ang. \textit{convolutional neural networks}) bez problemu radzą sobie z przetwarzaniem obrazów. Wykrywanie obiektów w czasie rzeczywistym\cite{ren2015faster}, rozpoznawanie twarzy\cite{lin1997face} czy prowadzenie pojazdu\cite{bojarski2016end} przez komputer nie wydaje się być dzisiaj niczym zaskakującym. Sieci takie pomagają również wykrywać zmiany nowotworowe na podstawie zdjęć\cite{nnnature} lub opisywać fotografie\cite{xu2015show}.
 
-Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (ang. \textit{natural language processing}) zajmuje się opracowaniem metod pozwalającym rozumieć maszynom nasz język\cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim maszyny potrafią przewidywać zakończenie zdania\cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
+Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludzkiego punktu widzenia, komunikację z maszynami. Dziedzina nazywana przetwarzaniem języka naturalnego (ang. \textit{natural language processing}) zajmuje się opracowaniem metod automatyzacji analizy i rozumienia języka naturalnego przez komputer\cite{nnspeech}. Rezultaty są zaskakujące, a możliwości obiecujące. W dobie tak zwanych asystentów nie jest już niczym dziwnym mówienie do maszyny, oglądanie wirtualnych prezenterów w telewizji. W przetwarzaniu języka zaskakująco skuteczne są tak zwane sieci rekurencyjne z pamięcią \cite{tai2015improved}.  Wnioskowanie kolejnego słowa w zdaniu jest ich ciekawym zastosowaniem. Dzięki nim maszyny potrafią przewidywać zakończenie zdania\cite{nngboard}, przygotować automatyczną odpowiedź, czy też napisać cały artykuł.
 
 Wiedząc o tak zaawansowanych zastosowaniach i mając dowód skuteczności sieci neuronowych przeprowadzono eksperyment mający na celu zbadanie ich skuteczności w problemie wykrywania uszkodzeń lokalnych w sygnałach diagnostycznych pochodzących z maszyn górniczych. Dalsza część pracy opisuje wykorzystane metody, proces dochodzenia do rozwiązania oraz zastosowanie opracowanego modelu w systemie potrafiącym monitorować stan maszyny w czasie rzeczywistym.
 
@@ -270,7 +270,7 @@ Przed przystąpieniem do uczenia sieci neuronowej niezbędne jest przygotowanie 
 	\end{equation}
 	\item Skośność
 	\begin{equation}
-	Skew (X) = 3 \cdot \frac{\bar{x} - m}{s}
+	Skew (X) = 3 \cdot \frac{\bar{x} - m}{s}.
 	\end{equation}
 \end{itemize}
 
@@ -278,7 +278,7 @@ Przed przystąpieniem do uczenia sieci neuronowej niezbędne jest przygotowanie 
 
 \section{Zastosowanie sieci neuronowych}
 
-Sieci neuronowe są strukturami realizującymi przetwarzanie danych poprzez rzędy elementów. Siecią użytą w pracy jest tak zwany perceptron wielowarstwowy. Jego bazowym elementem jest tak zwany perceptron zaprezentowany na rysunku \ref{perceptron}. Składa się on z wejść wraz z wagami, funkcją sumującą oraz funkcją aktywacji. W przypadku użycia funkcji kroku perceptron pozwala na binarną klasyfikację liniowo separowalnych danych. 
+Sieci neuronowe są strukturami realizującymi przetwarzanie danych poprzez rzędy elementów. Siecią użytą w pracy jest tak zwany perceptron wielowarstwowy. Jego bazowym elementem jest tak zwany perceptron zaprezentowany na rysunku \ref{perceptron}. Składa się on z wejść wraz z wagami oraz funkcji aktywacji. W przypadku użycia funkcji kroku perceptron pozwala na binarną klasyfikację liniowo separowalnych danych. 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=10cm]{images/perceptron_c.pdf}
@@ -393,10 +393,10 @@ Parametry opisujące sieć to tak zwane hiperparametry modelu (ang. \textit{hype
 	\item Funkcje aktywacji w neuronach.
 \end{itemize}
 
-Nie istnieje skuteczna metoda doboru parametrów, przy zastosowaniu złożonych sieci badacze najczęściej polegają na swoim doświadczeniu oraz intuicji. Na potrzeby tego zadania przeprowadzono szereg eksperymentów mających na celu określić najskuteczniejszą architekturę do wykonania postawionego zadania. Każdy z modeli przetestowano według metod przedstawionych w poprzednim rozdziale. 
+Nie istnieje skuteczna metoda doboru parametrów, przy zastosowaniu złożonych sieci badacze najczęściej polegają na swoim doświadczeniu oraz intuicji. Na potrzeby tego zadania przeprowadzono szereg eksperymentów mających na celu określenie najskuteczniejszej architektury do wykonania postawionego zadania. Każdy z modeli przetestowano według metod przedstawionych w poprzednim rozdziale. 
 
 \section{Zależność od danych wejściowych}
-Pierwszy eksperyment będzie postawą do decyzji o tym jakich danych należy użyć do uczenia sieci. Porównane zostaną dwa podejścia: użycie surowego sygnału oraz wstępnie przetworzonego. Ostateczna decyzja podjęta zostanie na podstawie statystyk skuteczności modelu uzyskanych według procesu zaprezentowanego na rysunku \ref{proces-caly} w poprzednim rozdziale. Przeprowadzono trzy eksperymenty których parametry zaprezentowano poniżej.
+Pierwszy eksperyment będzie podstawą do decyzji o tym jakich danych należy użyć do uczenia sieci. Porównane zostaną dwa podejścia: użycie surowego sygnału oraz wstępnie przetworzonego. Ostateczna decyzja podjęta zostanie na podstawie statystyk skuteczności modelu uzyskanych według procesu zaprezentowanego na rysunku \ref{proces-caly} w poprzednim rozdziale. Przeprowadzono trzy eksperymenty których parametry zaprezentowano poniżej.
 
 \begin{enumerate}
 	\item Surowy sygnał podeście pierwsze
@@ -442,7 +442,7 @@ Po przeprowadzeniu implementacji, uczenia i testowania sieci otrzymano szczegó�
 Z przeprowadzonych eksperymentów wyciągnięto następujące wnioski. Zastosowanie surowego sygnału, niezależnie od architektury, daje bardzo chaotyczne wyniki sugerujące że proces nauczania nie przebiega prawidłowo a predykcja jest obarczona dużym błędem. Podejście z zastosowaniem surowego sygnału jest kosztowne obliczeniowo i mało efektywne dlatego należy je wykluczyć z dalszych rozważań. Z drugiej strony zastosowanie estymatorów opisujących sygnał daje obiecujące wyniki pozwalające wnioskować o skutecznym uczeniu się sieci. W oparciu o zaproponowaną architekturę zostanie przeprowadzony kolejny eksperyment mający stwierdzić czy przy użyciu obecnych danych uczących można otrzymać lepsze wyniki.
 
 \section{Zależność od architektury}
-Na podstawie eksperymentów przeprowadzonych w poprzedniej części wywnioskowano o największej skuteczności sieci neuronowej nauczanej na estymatorach opisujących sygnały diagnostyczne. W kolejnym kroku należy przeprowadzić eksperyment wyznaczający najlepszą z architektur. Ponieważ architektura zaproponowana w poprzednim eksperymencie dawała wyniki świadczące o poprawnie przebiegającym procesie uczenia zaproponowano różne jej wariancje. Przeprowadzono szereg prób z różnymi liczbami warstw ukrytych oraz węzłów w sieci. Skuteczność architektur zaprezentowana na rysunkach \ref{wynik2-est-5-3-2}, \ref{wynik-est-8-5}, \ref{wynik-est-2}, \ref{wynik-est-5} jest bardzo zbliżona, modele osiągają podobne wyniki w zależności od współczynnika SNR.
+Na podstawie eksperymentów przeprowadzonych w poprzedniej części wywnioskowano o największej skuteczności sieci neuronowej nauczanej na estymatorach opisujących sygnały diagnostyczne. W kolejnym kroku należy przeprowadzić eksperyment wyznaczający najlepszą z architektur. Ponieważ architektura zaproponowana w poprzednim eksperymencie dawała wyniki świadczące o poprawnie przebiegającym procesie uczenia zaproponowano różne jej warianty. Przeprowadzono szereg prób z różnymi liczbami warstw ukrytych oraz węzłów w sieci. Skuteczność architektur zaprezentowana na rysunkach \ref{wynik2-est-5-3-2}, \ref{wynik-est-8-5}, \ref{wynik-est-2}, \ref{wynik-est-5} jest bardzo zbliżona, modele osiągają podobne wyniki w zależności od współczynnika SNR.
 
  Ostatecznie do użycia został wybrany model z jedną warstwą ukrytą o pięciu neuronach. Wyniki dla tego modelu widoczne są na rysunku \ref{wynik-est-5}. Ze względu na niewielki rozmiar sieci można dokonać wizualizacji wyżej wymienionej sieci. Schemat przedstawiono na rysunku \ref{final_model}. 
 
@@ -499,7 +499,7 @@ Do tego momentu opracowano kompletny model sieci neuronowej dokonującej skutecz
 \chapter{System monitorujący - przykładowe zastosowanie modelu}
 Opracowany model został użyty do stworzenia prostego systemu monitorującego. Na podstawie dostarczonego sygnału diagnostycznego system dostarcza informacji o predykowanym stanie maszyny. Schemat działania systemu zaprezentowano na rysunku \ref{monitor}. Otrzymany sygnał diagnostyczny zostaje przetworzony i dostarczony do modelu który zwraca wynik predykcji.
  
-Implementację rozwiązana stworzono w języku Python z użyciem bibliotek \textit{Scikit-learn} do obsługi modelu sieci neuronowej oraz \textit{Dash} do stworzenia panelu wizualizacji. 
+Implementację rozwiązania stworzono w języku Python z użyciem bibliotek \textit{Scikit-learn} do obsługi modelu sieci neuronowej oraz \textit{Dash} do stworzenia panelu wizualizacji. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=1.2]{images/monitor_c.pdf}
