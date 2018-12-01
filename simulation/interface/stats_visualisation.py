@@ -20,7 +20,7 @@ plotly.io.orca.config.executable = r"C:\Users\pbudzyns\AppData\Local\Programs\or
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-file_list = [{'label':name.replace("inputs/", ""), 'value':name} for name in glob.glob("inputs/*.csv")]
+file_list = [{'label':name.replace("outputs/", ""), 'value':name} for name in glob.glob("outputs/nn*.csv")]
 
 
 
@@ -44,7 +44,8 @@ def update_chart(filename):
 def get_figure(filename, type='dashboard'):
     data = []
     table = pd.read_csv(filename)
-    x = list(table['SNR'])
+    tmp_table = pd.read_csv("outputs/snr_to_acc(2,).csv")
+    x = list(tmp_table['SNR'])
     infos = "ACC,RECALL,PRECISION,F1_SCORE".split(',')
     for info in infos:
         d = go.Scatter(x=x, y=list(table[info]),
@@ -65,11 +66,12 @@ def plot_all(filenames):
 
 def save_as_pdf(filename):
     figure = get_figure(filename, type='pdf')
-    pio.write_image(figure, filename.replace("inputs", "../../latex/images2").replace(".csv", ".pdf"))
+    new_filename = filename.replace("outputs", "../../latex/images2").replace(".csv", ".pdf")
+    pio.write_image(figure, new_filename)
 
 
 
 
 if __name__ == '__main__':
-    # plot_all(glob.glob("inputs/*.csv"))
+    plot_all(glob.glob("outputs/nn*.csv"))
     app.run_server(port=8080, debug=True)

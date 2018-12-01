@@ -140,9 +140,9 @@ def visualise_clusters(model):
     handler = SignalsHandler(preprocessing=get_estimators)
     # handler.load_signals('inputs/symulacje_400_50_srednie')
     handler.load_no_pulsation('inputs/snr_100_100/nopulsation_100.csv')
-    handler.load_pulsation('inputs/snr_100_100/pulsation_2_100_-5.733.csv')
-    # handler.load_pulsation('inputs/snr_100_100/pulsation_3.5_100_-4.061.csv')
-    # handler.load_pulsation('inputs/snr_100_100/pulsation_0.1_100_-6.912.csv')
+    handler.load_pulsation('inputs/snr_100_100/pulsation_2_100_0.162.csv')
+    # handler.load_pulsation('inputs/snr_100_100/pulsation_3.5_100_0.197.csv')
+    # handler.load_pulsation('inputs/snr_100_100/pulsation_0.1_100_0.142.csv')
     handler.initialize_data_sets()
     model.fit(handler.learning_data, handler.learning_labels)
     # var, skew, kurt

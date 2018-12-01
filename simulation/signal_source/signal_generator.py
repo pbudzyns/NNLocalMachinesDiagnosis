@@ -36,11 +36,25 @@ def signal_generator(fs=2**13, T=1.0, mu_imp1=0, f1_low=1500, f1_high=2500, s_no
     rob2 = np.random.randn(nx - 1)
     n_add = rob2 * s_add
     y = y + n_add
-    return y, t[:-1]
+    return y, t[:-1], soi1, response1, n_add
 
 
 if __name__ == '__main__':
-    y, t = signal_generator(fs=2 ** 13, T=0.5, mu_imp1=7,
+    y, t, s, r, n = signal_generator(fs=2 ** 13, T=0.5, mu_imp1=3,
                             f1_low=1500, f1_high=2500,
                             s_noise=0.1, s_add=0.7)
+
+    import matplotlib.pyplot as plt
+    plt.plot(s)
+    plt.show()
+    vals = [0, 0.1, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0]
+    for val in vals:
+        tmp = []
+        for i in range(50):
+            y, t, s, r, n = signal_generator(fs=2 ** 13, T=0.5, mu_imp1=val,
+                                         f1_low=1500, f1_high=2500,
+                                         s_noise=0.1, s_add=0.7)
+            tmp.append(np.sqrt(np.var(s, 0)/np.var(n, 0)))
+        print("SNR for ", val, ": ", np.mean(tmp))
+
 

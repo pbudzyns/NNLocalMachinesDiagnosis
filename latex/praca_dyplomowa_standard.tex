@@ -231,18 +231,18 @@ Dalsza praca oparta jest na wygenerowanym zbiorze danych który zawiera sygnały
 	\begin{tabular}{ccc}
 		\hline
 		\hline                       
-		SNR & Liczba sygnałów & {\'S}rednia amplituda impulsu \rule{0pt}{2.6ex}  \\  [0.5ex] 
+		SNR & Liczba sygnałów &{\begin{tabular}[c]{@{}c@{}}{\'S}rednia amplituda\\ impulsu\end{tabular}}  \rule{0pt}{2.6ex}  \\  [0.5ex] 
 		\hline 
-		0.1 & 900 & 0.0  \\
-		0.1 & 100 & 0.1  \\
-		0.5 & 100 & 0.5  \\
-		1.5 & 100 & 1.0  \\
-		1.0 & 100 & 1.5  \\
-		0.1 & 100 & 2.0  \\
-		0.1 & 100 & 2.5  \\
-		0.1 & 100 & 3.0  \\
-		0.1 & 100 & 3.5  \\
-		0.1 & 100 & 4.0  \\ 
+		0.000 & 200 & 0.0  \\
+		0.142 & 100 & 0.1  \\
+		0.144 & 100 & 0.5  \\
+		0.148 & 100 & 1.0  \\
+		0.154 & 100 & 1.5  \\
+		0.162 & 100 & 2.0  \\
+		0.172 & 100 & 2.5  \\
+		0.185 & 100 & 3.0  \\
+		0.197 & 100 & 3.5  \\
+		0.210 & 100 & 4.0  \\ 
 		\hline 
 	\end{tabular}
 	\caption*{\textit{Źródło: opracowanie własne}}
@@ -436,7 +436,7 @@ Po przeprowadzeniu implementacji, uczenia i testowania sieci otrzymano szczegó�
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=14cm]{images/nn_small_532.pdf}
+	\includegraphics[width=14cm]{images/snr_to_acc532.pdf}
 	\caption{ Eksperyment 3. Wyniki dla estymatorów, architektura -5-3-2-}
 	\label{wynik-est-5-3-2}
 \end{figure}
@@ -450,25 +450,25 @@ Na podstawie eksperymentów przeprowadzonych w poprzedniej części wywnioskowan
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=14cm]{images/nn_small_532.pdf}
+	\includegraphics[width=14cm]{images/snr_to_acc532.pdf}
 	\caption{Wyniki dla sieci o architekturze -5-3-2-}
 	\label{wynik2-est-5-3-2}
 \end{figure}
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=14cm]{images/nn_small_85.pdf}
+	\includegraphics[width=14cm]{images/snr_to_acc85.pdf}
 	\caption{Wyniki dla sieci o architekturze -8-5-}
 	\label{wynik-est-8-5}
 \end{figure}
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=14cm]{images/nn_small_2.pdf}
+	\includegraphics[width=14cm]{images/snr_to_acc2.pdf}
 	\caption{Wyniki dla sieci o architekturze -2-}
 	\label{wynik-est-2}
 \end{figure}
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=14cm]{images/nn_small_5.pdf}
+	\includegraphics[width=14cm]{images/snr_to_acc5.pdf}
 	\caption{Wyniki dla sieci o architekturze -5-}
 	\label{wynik-est-5}
 \end{figure}
