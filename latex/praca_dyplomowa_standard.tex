@@ -138,6 +138,7 @@
 
 
 {\backmatter \chapter{Wstęp}}
+\label{chap:wstep}
 
 %\chapter{Uszkodzenia lokalne oraz ich wykrywanie}
 Tematem pracy jest wykorzystanie sieci neuronowych w problemie wykrywania uszkodzeń lokalnych w maszynach górniczych. Zadanie polega na przetworzeniu sygnału diagnostycznego oraz dokonaniu na jego podstawie decyzji o możliwości wystąpienia uszkodzenia w mechanizmach maszyny górniczej. Uszkodzeniem takim mogą być wewnętrzne pęknięcia, ubytki, wykruszone zęby kół zębatych. Przykład uszkodzonego elementu zaprezentowano na ilustracji \ref{uszkodzenie}.
@@ -204,6 +205,7 @@ Co zaskakujące, sieci neuronowe pozwalają na coraz bardziej naturalną, z ludz
 Wiedząc o tak zaawansowanych zastosowaniach i mając dowód skuteczności sieci neuronowych przeprowadzono eksperyment mający na celu zbadanie ich skuteczności w problemie wykrywania uszkodzeń lokalnych w sygnałach diagnostycznych pochodzących z maszyn górniczych. Dalsza część pracy opisuje wykorzystane metody, proces dochodzenia do rozwiązania oraz zastosowanie opracowanego modelu w systemie potrafiącym monitorować stan maszyny w czasie rzeczywistym.
 
 \chapter{Metodologia}
+\label{chap:meto}
 Zakres wykonanej pracy obejmuje poszukiwanie optymalnego rozwiązania dla postawionego problemu. Na ten problem składają się wybór i przygotowanie danych uczących model oraz zaprojektowanie skutecznego modelu. 
 W kolejnych krokach opisano narzędzia i techniki wykorzystane w tym celu. Ponieważ sieci neuronowe wymagają znaczącej ilości danych, a~ich zdobycie w przypadku zaawansowanych maszyn górniczych jest problematyczne, pracę należało zacząć od stworzenia sytemu symulowania sygnałów o charakterystyce zbliżonej do sygnału diagnostycznego oraz wygenerowania zbioru danych (ang. \textit{dataset}). Następnie poruszony zostanie temat tak zwanej ekstrakcji cech, wstępnej obróbki danych w celu stworzenia najlepiej opisujących je cech. Finalnie możliwe jest przystąpienie do projektowania, trenowania i testowania sieci w celu stworzenia możliwie skutecznego modelu.
 %\chapter{Sygnał diagnostyczny - symulowanie, wstępne przetwarzanie} 
@@ -297,7 +299,7 @@ W trakcie dalszych badań odkryto że połączenie wielu perceptronów pozwala n
 
 \section{Trening sieci neuronowej}
 
-Trening sieci neuronowej bazuje na minimalizacji popełnianych przez nią błędów. Podczas tego procesu sygnały ze zbioru uczącego podawane są na wejście sieci. Ponieważ posiadamy wiedzę o tym czy dany sygnał pochodzi ze sprawnej lub uszkodzonej maszyny możliwe jest porównanie otrzymanego wyniku ze stanem faktycznym. W przypadku różnicy wartości predykowanej i rzeczywistej rozpoczyna się proces dostrajania wag w połączeniach węzłów sieci neuronowej. Do wyznaczania wag w sieciach typu perceptron wielowarstwowy stosuje się zazwyczaj sekwencyjne algorytmy gradientowe. Prosty algorytm tego typu działa w następujący sposób: Posiadając wektor wag $w^{(i)}$ w $(i)$-tej iteracji, wektor wag w iteracji $(i+1)$-ej zmieniamy następująco:
+Trening sieci neuronowej bazuje na minimalizacji popełnianych przez nią błędów. Podczas tego procesu sygnały ze zbioru uczącego podawane są na wejście sieci. Ponieważ posiadamy wiedzę o tym czy dany sygnał pochodzi ze sprawnej lub uszkodzonej maszyny możliwe jest porównanie otrzymanego wyniku ze stanem faktycznym. W przypadku różnicy wartości predykowanej i rzeczywistej rozpoczyna się proces dostrajania wag w połączeniach węzłów sieci neuronowej. Do wyznaczania wag w sieciach typu perceptron wielowarstwowy stosuje się zazwyczaj sekwencyjne algorytmy gradientowe. Prosty algorytm tego typu działa w następujący sposób: posiadając wektor wag $w^{(i)}$ w $(i)$-tej iteracji, wektor wag w iteracji $(i+1)$-ej zmieniamy następująco:
 \begin{equation}
 	w^{(i+1)} = w^{(i)} + \Delta w,
 \end{equation}
@@ -308,7 +310,7 @@ gdzie $w^{(i)}$ jest starym a $w^{(i+1)}$ nowym wektorem wag, oraz
 gdzie $\alpha > 0$ jest przyjętym współczynnikiem nauczania a $E$ popełnionym błędem.
 
 
-Najpopularniejsza metoda dla wielowarstwowych perceptronów, oraz wykorzystany w pracy to algorytm propagacji wstecznej (ang. \textit{backpropagation algorithm})\cite{rumelhart1986learning} zaproponowany w 1986 roku przez Runmelharta, Hintona i Williamsa. Algorytm ten wziął swoją nazwę od sposobu działania, propagowania błędu w tył sieci. Ogólnie mówiąc wagi dla warstwy $n$ optymalizowane są na podstawie błędu popełnionego przez warstwę $n+1$. Ogólny schemat postępowania można zapisać następująco. 
+Najpopularniejsza metoda dla wielowarstwowych perceptronów, oraz wykorzystana w pracy to algorytm propagacji wstecznej (ang. \textit{backpropagation algorithm})\cite{rumelhart1986learning} zaproponowany w 1986 roku przez Runmelharta, Hintona i Williamsa. Algorytm ten wziął swoją nazwę od sposobu działania, propagowania błędu w tył sieci. Ogólnie mówiąc wagi dla warstwy $n$ optymalizowane są na podstawie błędu popełnionego przez warstwę $n+1$. Ogólny schemat postępowania można zapisać następująco. 
 \begin{enumerate}
 	\item Losowa inicjalizacja wag w sieci neuronowej
 	\item Obliczenie odpowiedzi sieci dla sygnału ze zbioru uczącego
@@ -358,7 +360,7 @@ Opracowanie optymalnego modelu wymaga istnienia sposobu na jego przetestowanie. 
 		\end{equation}
 		\item F1 - średnia harmoniczna precyzji i czułości 
 		\begin{equation}
-		F1 = 2 \cdot \frac{precision \cdot recall}{precision + recall}
+		F1 = 2 \cdot \frac{precision \cdot recall}{precision + recall}.
 		\end{equation}
 	\end{enumerate}
 	
@@ -412,7 +414,7 @@ Pierwszy eksperyment będzie podstawą do decyzji o tym jakich danych należy u�
 	\item Estymatory sygnału
 	\subitem dane wejściowe: 8
 	\subitem warstwy ukryte: 5 - 3 - 2
-	\subitem liczba wag: mało
+	\subitem liczba wag: mało.
 \end{enumerate}
 
 Po przeprowadzeniu implementacji, uczenia i testowania sieci otrzymano szczegółowe statystyki dla każdego z nich. Wyniki pozwalają na wnioskowanie o skuteczności rozwiązania oraz możliwości dalszej pracy z wybraną architekturą lub jej wariantami. Wyniki dla pierwszego eksperymentu przedstawione na rysunku \ref{wynik-sur-1000-500-200} pokazują bardzo dziwne zachowanie oraz niską skuteczność. Można śmiało założyć że sieć nie uczy się prawidłowo a predykcje nie są prawidłowe. Kolejny eksperyment którego wyniki widać na rysunku \ref{wynik-sur-500-200} prezentują się nieco lepiej lecz również są w pewnym stopniu chaotyczne. Da się jednak zauważyć płynny wzrost skuteczności dla sygnałów z coraz większymi impulsami. Ostatecznie eksperyment trzeci daje najbardziej obiecujące wyniki, zaprezentowane na rysunku \ref{wynik-est-5-3-2}. Prawidłowość predykcji wzrasta bardzo płynnie a od pewnego poziomu mocy impulsu wynosi ponad $80\%$.
@@ -533,6 +535,19 @@ W drugim wariancie zrealizowano program generujący sygnał nieprzerwanie. Jego 
 Zaprezentowany w drugim wariancie system odzwierciedla rzeczywiste warunki w których monitorowanie stanu technicznego musi następować w czasie rzeczywistym. Szybkie działanie systemu pozwala na otrzymywanie odpowiedzi niemalże natychmiast. System zwraca poprawne wyniki dla dużych wartości pulsacji, jednak dla niewielkich popełnia błędy. Poprawa skuteczności modelu wymaga dodatkowej pracy nad wstępnym przetwarzaniem sygnału oraz dalszych eksperymentów przy wyborze architektury sieci neuronowej.
 %\chapter{Wnioski}
 {\backmatter \chapter{Wnioski}}
+W powyższej pracy inżynierskiej zaprezentowano przebieg procesu opracowania rozwiązania dla problemu detekcji uszkodzeń lokalnych w maszynach górniczych.
+
+Wstęp przedstawia zagadnienie detekcji uszkodzeń lokalnych. Opisano przyczyny ich powstawania, skutki, metody diagnozowania maszyn górniczych oraz zaprezentowano sygnały diagnostyczne pochodzące z urządzeń o różnej kondycji. Przegląd literatury pokazuje obecnie opracowane metody bazujące na różnych podejściach. Dokonano przeglądu osiągnięć w zastosowaniach sieci neuronowych oraz zaprezentowano szerokie spektrum ich możliwości. 
+
+W rozdziale 1 przedstawiono zastosowaną metodologię. Proces rozpoczęty od symulacji sygnałów na potrzeby nauczania sieci. Następnie w sekcji 1.2 zaproponowano sposób wstępnego przetwarzania danych podparty na wiedzą o problemie detekcji cyklicznych impulsów w sygnale diagnostycznym. Opis sygnału za pomocą statystyk opisujących zmienność pozwala w konsekwencji zmniejszyć złożoność sieci oraz poprawić wyniki. W kolejnych sekcjach przybliżono zagadnienie treningu oraz testowania sieci neuronowych.
+
+Rozdział 2 opisuje proces dochodzenia do zadowalającego rozwiązania. Przeprowadzono szereg eksperymentów porównujących wydajność modelu w zależności od architektury sieci neuronowej oraz zestawu danych uczących. Udowodniono bezpośredni związek między skutecznością a sposobem reprezentacji sygnału na korzyść użycia estymatorów. Ostatecznie dokonano wyboru optymalnej architektury pozwalającej na rozwiązanie postawionego problemu. 
+
+W rozdziale 3 zaprezentowano zastosowanie stworzonego modelu w kompleksowym systemie monitorującym pracę urządzenia. Stworzony system umożliwia badanie stanu maszyny w czasie rzeczywistym, natychmiastowo zwracając informację o ewentualnym uszkodzeniu. W ten sposób udowodniono użyteczność stworzonego rozwiązania. Testy systemu informują o poprawności klasyfikacji w zależności od wysokości impulsu generowanego przez uszkodzenie.
+
+Opracowany system rozwiązuje postawiony problem, jednak jego odpowiedzi obarczone są pewnym błędem. W zależności od mocy impulsu model może zwracać nieprawidłowe wartości, szczególnie przy niewielkich ich wartościach. Możliwością dalszego rozwoju rozwiązania mogą być kolejne próby przetwarzania sygnału, odszumianie, nowe metody opisu cech, eksperymenty z użyciem nowych sieci neuronowych. Jedynym sygnałem końca badań w przypadku pracy nad takim modelem może być założony z góry żądany poziom jego skuteczności.  
+
+ 
 \newpage
 
 
