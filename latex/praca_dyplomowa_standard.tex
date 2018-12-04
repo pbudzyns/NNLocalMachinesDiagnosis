@@ -518,7 +518,7 @@ W pierwszym wariancie możliwe jest wygenerowanie sygnału diagnostycznego oraz 
 \end{figure}
 
 W drugim wariancie zrealizowano program generujący sygnał nieprzerwanie. Jego interfejs pokazano na rysunkach \ref{monitor_live_1} i \ref{monitor_live_2}. Program umożliwia ustawienie średniej wartości impulsów w aktualnie generowanym programie przy pomocy suwaka znajdującego się pomiędzy wykresami. Górny wykres jest bieżącą wizualizacją sygnału diagnostycznego. Dolny wykres zawiera informacje na temat aktualnej prognozy stanu sprawności maszyny, prawdopodobieństwo sprawności i uszkodzenia.
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{images/monitor_live_1.png}
 	\caption{Program monitorujący stan maszyny. Reakcja na dużą wartość pulsacji.}
@@ -532,7 +532,27 @@ W drugim wariancie zrealizowano program generujący sygnał nieprzerwanie. Jego 
 	\label{monitor_live_2}
 \end{figure}
 
-Zaprezentowany w drugim wariancie system odzwierciedla rzeczywiste warunki w których monitorowanie stanu technicznego musi następować w czasie rzeczywistym. Szybkie działanie systemu pozwala na otrzymywanie odpowiedzi niemalże natychmiast. System zwraca poprawne wyniki dla dużych wartości pulsacji, jednak dla niewielkich popełnia błędy. Poprawa skuteczności modelu wymaga dodatkowej pracy nad wstępnym przetwarzaniem sygnału oraz dalszych eksperymentów przy wyborze architektury sieci neuronowej.
+Zaprezentowany w drugim wariancie system odzwierciedla rzeczywiste warunki w których monitorowanie stanu technicznego musi następować w czasie rzeczywistym. Szybkie działanie systemu pozwala na otrzymywanie odpowiedzi niemalże natychmiast. System zwraca poprawne wyniki dla dużych wartości pulsacji, jednak dla niewielkich popełnia błędy.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.85]{images/monitor_system_stats300_with_probas2bar.pdf}
+	\caption{Wyniki testu. Procent sygnałów zakwalifikowanych jako uszkodzenia w zależności od średnich wartości impulsów w sygnale.}
+	\label{test_bar}
+\end{figure}
+
+Dla zbadania poprawności przeprowadzono testy sprawdzające reakcje systemu dla sygnałów o różnych wysokościach impulsów. Dla próby 300 sygnałów o poszczególnej średniej wartości impulsów zbadano predykcje zwróconą z systemu. Rysunek \ref{test_bar} przedstawia procent sygnałów zakwalifikowanych jako pochodzące z uszkodzonej maszyny w zależności od średniej wartości impulsów. Wynika z niego, że system ma skłonność do klasyfikowania sygnałów o znikomej pulsacji jako uszkodzone. W przypadku braku pulsacji istnieje około 40 procent szansy na stwierdzenie uszkodzenia.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{images/monitor_system_stats300_with_probas2box.pdf}
+	\caption{Wyniki testu. Wykres pudełko-wąsy dla zwracanych wartości prawdopodobieństwa w zależności od średnich wartości impulsów w sygnale.}
+	\label{test_box}
+\end{figure}
+
+System jest również zwrócić prawdopodobieństwo wystąpienia uszkodzenia dla danego sygnału. Domyślnie prawdopodobieństwo większe lub równe $50\%$ oznacza klasyfikacje jako uszkodzone. Rysunek \ref{test_box} przedstawia wykres pudełko-wąsy dla prawdopodobieństw zwracanych przez system dla różnych sygnałów. Wynika z tego że również dla sygnału bez impulsów system jest w stanie stwierdzić stuprocentowe szanse na uszkodzenie, oczywiście jest to poważny błąd. Jednak w ogólności system zachowuje się poprawnie, wraz ze wzrostem wartości impulsów stwierdza uszkodzenie z coraz większą pewnością. Problem zbyt częstego stwierdzania uszkodzenia przy małych wartościach impulsów można zniwelować podwyższając próg alarmowy. Na przykład klasyfikując sygnał jako uszkodzenie dla prawdopodobieństwa przekraczającego $60\%$. Poprawa skuteczności modelu wymaga dodatkowej pracy nad wstępnym przetwarzaniem sygnału oraz dalszych eksperymentów przy wyborze architektury sieci neuronowej.
+
 %\chapter{Wnioski}
 {\backmatter \chapter{Wnioski}}
 W powyższej pracy inżynierskiej zaprezentowano przebieg procesu opracowania rozwiązania dla problemu detekcji uszkodzeń lokalnych w maszynach górniczych.
